@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DERRK - Animación 3D de Productos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Video Background (opcional) -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="assets/nozzle.mp4" type="video/mp4">
+            <!-- Puedes agregar tu video aquí -->
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">DERRK.COM</div>
+        <nav class="nav-menu">
+            <a href="#portfolio" class="nav-link">Portafolio</a>
+            <a href="#services" class="nav-link">Servicios</a>
+            <a href="#contact" class="nav-link">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">ANIMACIÓN<br>3D DE PRODUCTOS</h1>
+        <p class="hero-subtitle">POR DEREK ELLIOTT</p>
+        <div class="scroll-indicator">scroll para más</div>
+    </section>
+
+    <!-- Designed to Delight Section -->
+    <section id="delight">
+        <h2 class="section-title">DISEÑADO PARA <span class="bold">ENCANTAR</span></h2>
+        <p class="section-description">
+            ¿Estás lanzando un <span class="highlight">nuevo producto</span> y necesitas visuales para que la gente se emocione tanto como tú? Te tengo cubierto.
+        </p>
+        <a href="#contact" class="cta-button">
+            HABLAR CON DEREK
+            <span class="cta-note">(este botón te permitirá <span class="highlight">agendar una llamada conmigo</span>)</span>
+        </a>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="portfolio-grid">
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="pedrali">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/pedrali.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Pedrali</div>
+            </div>
+
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="roman">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/roman.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Roman: FOCUS</div>
+            </div>
+
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="herman">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/herman.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Herman Miller x Logitech</div>
+            </div>
+
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="muuto">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/muuto.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Muuto</div>
+            </div>
+
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="cosm">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/cosm.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Herman Miller COSM</div>
+            </div>
+
+            <!-- Portfolio Item con Video -->
+            <div class="portfolio-item" data-project="type">
+                <video class="portfolio-video" muted loop playsinline>
+                    <source src="videos/9days.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">9 Days of Type</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase Section -->
+    <section id="video-showcase">
+        <div class="video-player-container">
+            <video id="mainVideo" controls poster="images/poster.jpg">
+                <source src="videos/showcase.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+        </div>
+        <div class="video-description">
+            <h3>Trabajo Destacado</h3>
+            <p>Animación 3D de productos con calidad cinematográfica</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title"><span class="bold">CÓMO</span> PUEDO <span class="bold">AYUDAR</span></h2>
+        <p class="section-description">
+            ¿Listo para empezar con animación 3D? Hay algunas formas en las que podemos hacer que esto suceda.
+        </p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <h3 class="service-title">Tutoriales Gratuitos</h3>
+                <p class="service-description">
+                    Si estás interesado en aprender por tu cuenta, únete a mí y a más de <strong>150,000</strong> suscriptores para tutoriales de Blender en profundidad y de alta calidad.
+                </p>
+                <a href="https://youtube.com" class="service-link" target="_blank">Ver Tutoriales →</a>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Proyectos Personalizados</h3>
+                <p class="service-description">
+                    ¿Quieres que trabaje en un proyecto personalizado contigo? Podemos tener una llamada para ver si somos una buena pareja.<br><br>
+                    Los proyectos personalizados <strong>comienzan en $20k.</strong>
+                </p>
+                <a href="#contact" class="service-link">Hablar con Derek →</a>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Cursos Completos</h3>
+                <p class="service-description">
+                    Tengo un curso completo disponible de forma gratuita que cubre todo lo que necesitas saber para empezar con animación de productos 3D profesional.
+                </p>
+                <a href="#" class="service-link">Ver Cursos →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Not Into Products Section -->
+    <section id="other-projects">
+        <h2 class="section-title">¿NO TE GUSTAN LOS <span class="bold">PRODUCTOS?</span></h2>
+        <p class="section-description">
+            Mi experiencia está orientada a lanzamientos de productos y presentaciones que buscan inversión, pero la gente ha hecho algunos usos bastante creativos de mis habilidades.
+            <br><br>
+            No tengas miedo de contactarme si crees que tienes un proyecto interesante que podría gustarme.
+        </p>
+        <a href="#contact" class="cta-button">
+            HABLAR CON DEREK
+            <span class="cta-note">(nuestra primera llamada es solo para ver si <span class="highlight">'conectamos'</span>)</span>
+        </a>
+
+        <div class="portfolio-grid" style="margin-top: 80px;">
+            <div class="portfolio-item">
+                <div class="portfolio-title">Roman</div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-title">NOMAD</div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-title">CTRL-Labs</div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-title">AppDynamics</div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-title">NINEBOXES</div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-title">Wax.io</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title"><span class="bold">DEREK</span> NO DERRK</h2>
+        
+        <div class="about-content">
+            <div>
+                <p class="section-description">
+                    DERRK es un espectáculo de un solo hombre con el apoyo de mi esposa y perro en Austin, TX.
+                    <br><br>
+                    No dudes en contactarme y hacerme saber qué tienes en mente. Me encantaría saber en qué estás trabajando.
+                </p>
+                
+                <a href="#contact" class="cta-button" style="margin-top: 20px;">
+                    HABLAR CON DEREK
+                </a>
+                
+                <p style="margin-top: 30px; color: var(--text-secondary);">
+                    ¿No estás listo para una llamada? Envíame un email <a href="mailto:derrk3d@gmail.com" style="color: var(--accent-color); font-weight: 600;">aquí</a>
+                </p>
+
+                <div class="social-links">
+                    <a href="#" class="social-link">Youtube</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Behance</a>
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">LinkedIn</a>
+                </div>
+            </div>
+            
+            <div>
+                <img src="images/derek.jpg" alt="Derek Elliott" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+        <h2 class="newsletter-title">NUEVOS TUTORIALES SIEMPRE<br><span class="bold">PRÓXIMAMENTE</span></h2>
+        
+        <form class="newsletter-form" id="newsletterForm">
+            <input 
+                type="email" 
+                class="newsletter-input" 
+                placeholder="EMAIL" 
+                required
+                id="emailInput"
+            >
+            <button type="submit" class="newsletter-button">Suscribirse</button>
+        </form>
+        <p id="formMessage" class="form-message"></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Todo el contenido con derechos de autor Derek Elliott</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
