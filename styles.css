@@ -31,14 +31,14 @@ html {
 }
 
 /* ===================================
-   VIDEO BACKGROUND
+   VIDEO BACKGROUND - SOLO EN HERO
    =================================== */
 .video-background {
-    position: fixed;
+    position: absolute;  /* Cambiado de fixed a absolute */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;        /* 100% del contenedor (hero) */
     z-index: -1;
     overflow: hidden;
 }
@@ -47,16 +47,12 @@ html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.08;
+    opacity: 1; /* Aumentado para que sea más visible */
 }
 
 .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+    background: none;
+    /* O simplemente elimina esta clase del HTML */
 }
 
 /* ===================================
@@ -123,14 +119,15 @@ header.scrolled {
    HERO SECTION
    =================================== */
 .hero {
+    position: relative;  /* Necesario para contener el video background */
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
     padding: 0 40px;
+    overflow: hidden;     /* Para que el video no se salga */
 }
 
 .hero-title {
