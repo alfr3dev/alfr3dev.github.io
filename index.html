@@ -3,23 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DERRK - Animación 3D de Productos</title>
+    <title>ALFR3DEV - What i make</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Video Background (opcional) -->
-    <div class="video-background">
-        <video autoplay muted loop playsinline id="bgVideo">
-            <source src="assets/nozzle.mp4" type="video/mp4">
-            <!-- Puedes agregar tu video aquí -->
-        </video>
-        <div class="video-overlay"></div>
-    </div>
-
     <!-- Header -->
     <header id="header">
-        <div class="logo">DERRK.COM</div>
+        <div class="logo">Alfr3dev</div>
         <nav class="nav-menu">
             <a href="#portfolio" class="nav-link">Portafolio</a>
             <a href="#services" class="nav-link">Servicios</a>
@@ -29,8 +20,16 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Video Background solo para Hero -->
+        <div class="video-background">
+            <video autoplay muted loop playsinline id="bgVideo">
+                <source src="assets/videobkgdfinal.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
         <h1 class="hero-title">ANIMACIÓN<br>3D DE PRODUCTOS</h1>
-        <p class="hero-subtitle">POR DEREK ELLIOTT</p>
+        <p class="hero-subtitle">POR Alfredo E. Valdez</p>
         <div class="scroll-indicator">scroll para más</div>
     </section>
 
@@ -41,7 +40,7 @@
             ¿Estás lanzando un <span class="highlight">nuevo producto</span> y necesitas visuales para que la gente se emocione tanto como tú? Te tengo cubierto.
         </p>
         <a href="#contact" class="cta-button">
-            HABLAR CON DEREK
+            HABLAR CON 
             <span class="cta-note">(este botón te permitirá <span class="highlight">agendar una llamada conmigo</span>)</span>
         </a>
     </section>
@@ -49,50 +48,50 @@
     <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="portfolio-grid">
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 1 -->
             <div class="portfolio-item" data-project="pedrali">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/pedrali.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzle.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Pedrali</div>
             </div>
 
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 2 -->
             <div class="portfolio-item" data-project="roman">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/roman.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Roman: FOCUS</div>
             </div>
 
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 3 -->
             <div class="portfolio-item" data-project="herman">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/herman.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/insidemotor.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller x Logitech</div>
             </div>
 
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 4 -->
             <div class="portfolio-item" data-project="muuto">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/muuto.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/muuto.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Muuto</div>
             </div>
 
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 5 -->
             <div class="portfolio-item" data-project="cosm">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/cosm.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/cosm.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller COSM</div>
             </div>
 
-            <!-- Portfolio Item con Video -->
+            <!-- Portfolio Item 6 -->
             <div class="portfolio-item" data-project="type">
-                <video class="portfolio-video" muted loop playsinline>
-                    <source src="videos/9days.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/9days.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">9 Days of Type</div>
             </div>
@@ -102,14 +101,14 @@
     <!-- Video Showcase Section -->
     <section id="video-showcase">
         <div class="video-player-container">
-            <video id="mainVideo" controls poster="images/poster.jpg">
-                <source src="videos/showcase.mp4" type="video/mp4">
+            <video id="mainVideo" controls poster="assets/poster.jpg">
+                <source src="assets/nozzle.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
         </div>
         <div class="video-description">
             <h3>Trabajo Destacado</h3>
-            <p>Animación 3D de productos con calidad cinematográfica</p>
+            <p>calidad cinematográfica</p>
         </div>
     </section>
 
@@ -133,9 +132,9 @@
                 <h3 class="service-title">Proyectos Personalizados</h3>
                 <p class="service-description">
                     ¿Quieres que trabaje en un proyecto personalizado contigo? Podemos tener una llamada para ver si somos una buena pareja.<br><br>
-                    Los proyectos personalizados <strong>comienzan en $20k.</strong>
+                    Los proyectos personalizados <strong>comienzan en $.</strong>
                 </p>
-                <a href="#contact" class="service-link">Hablar con Derek →</a>
+                <a href="#contact" class="service-link">Hablar con →</a>
             </div>
 
             <div class="service-card">
@@ -157,7 +156,7 @@
             No tengas miedo de contactarme si crees que tienes un proyecto interesante que podría gustarme.
         </p>
         <a href="#contact" class="cta-button">
-            HABLAR CON DEREK
+            HABLAR CON 
             <span class="cta-note">(nuestra primera llamada es solo para ver si <span class="highlight">'conectamos'</span>)</span>
         </a>
 
@@ -185,7 +184,7 @@
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title"><span class="bold">DEREK</span> NO DERRK</h2>
+        <h2 class="section-title"><span class="bold">Alfredo</span> NO DERRK</h2>
         
         <div class="about-content">
             <div>
@@ -196,11 +195,11 @@
                 </p>
                 
                 <a href="#contact" class="cta-button" style="margin-top: 20px;">
-                    HABLAR CON DEREK
+                    HABLAR CON 
                 </a>
                 
                 <p style="margin-top: 30px; color: var(--text-secondary);">
-                    ¿No estás listo para una llamada? Envíame un email <a href="mailto:derrk3d@gmail.com" style="color: var(--accent-color); font-weight: 600;">aquí</a>
+                    ¿No estás listo para una llamada? Envíame un email <a href="/cdn-cgi/l/email-protection#ddb9b8afafb6eeb99dbab0bcb4b1f3beb2b0" style="color: var(--accent-color); font-weight: 600;">aquí</a>
                 </p>
 
                 <div class="social-links">
@@ -214,7 +213,7 @@
             </div>
             
             <div>
-                <img src="images/derek.jpg" alt="Derek Elliott" class="about-image">
+                <img src="assets/derek.jpg" alt="Derek Elliott" class="about-image">
             </div>
         </div>
     </section>
@@ -240,7 +239,6 @@
     <footer>
         <p>Todo el contenido con derechos de autor Derek Elliott</p>
     </footer>
-
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
