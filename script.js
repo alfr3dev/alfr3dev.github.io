@@ -32,28 +32,42 @@ document.querySelectorAll('section').forEach(section => {
 });
 
 // ===================================
-// VIDEO CONTROLS - PLAY ON HOVER
+// VIDEO AUTOPLAY - SIN INTERFERENCIA
 // ===================================
 const portfolioItems = document.querySelectorAll('.portfolio-item');
 
+// Simplemente observa si los videos están en pantalla
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const video = entry.target.querySelector('.portfolio-video');
+        
+        if (video) {
+            if (entry.isIntersecting) {
+                // Está visible - asegurar que esté reproduciendo
+                if (video.paused) {
+                    video.play().catch(error => {
+                        console.log('Video autoplay prevented:', error);
+                    });
+                }
+            } else {
+                // No está visible - pausar para ahorrar recursos
+                video.pause();
+            }
+        }
+    });
+}, {
+    threshold: 0.2 // Solo necesita 20% visible para empezar
+});
+
+// Observar cada portfolio item
 portfolioItems.forEach(item => {
     const video = item.querySelector('.portfolio-video');
     
     if (video) {
-        // Play video on hover
-        item.addEventListener('mouseenter', () => {
-            video.play().catch(error => {
-                console.log('Video autoplay prevented:', error);
-            });
-        });
-
-        // Pause video when mouse leaves
-        item.addEventListener('mouseleave', () => {
-            video.pause();
-            video.currentTime = 0; // Reset to beginning
-        });
-
-        // Click to open project (optional)
+        // Observar visibilidad
+        videoObserver.observe(item);
+        
+        // Click para abrir proyecto
         item.addEventListener('click', () => {
             const projectName = item.dataset.project;
             if (projectName) {
@@ -69,20 +83,9 @@ portfolioItems.forEach(item => {
 const bgVideo = document.getElementById('bgVideo');
 
 if (bgVideo) {
-    // Ensure background video plays
+    // Asegurar que el video de fondo se reproduce
     bgVideo.play().catch(error => {
         console.log('Background video autoplay prevented:', error);
-    });
-
-    // Pause background video when scrolling for performance
-    let scrollTimeout;
-    window.addEventListener('scroll', () => {
-        if (bgVideo && !bgVideo.paused) {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                // Resume after scrolling stops
-            }, 150);
-        }
     });
 }
 
@@ -92,7 +95,6 @@ if (bgVideo) {
 const mainVideo = document.getElementById('mainVideo');
 
 if (mainVideo) {
-    // Add custom controls or analytics
     mainVideo.addEventListener('play', () => {
         console.log('Main video started playing');
     });
@@ -103,7 +105,6 @@ if (mainVideo) {
 
     mainVideo.addEventListener('ended', () => {
         console.log('Main video ended');
-        // You can add autoplay next video logic here
     });
 }
 
@@ -125,8 +126,6 @@ if (newsletterForm) {
         formMessage.className = 'form-message';
         
         try {
-            // Aquí puedes integrar tu servicio de email (Mailchimp, SendGrid, etc.)
-            // Por ahora, simulamos un envío exitoso
             await simulateEmailSubmit(email);
             
             // Success message
@@ -155,11 +154,10 @@ if (newsletterForm) {
     });
 }
 
-// Simulate email submission (replace with real API call)
+// Simulate email submission
 function simulateEmailSubmit(email) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            // Simulate success
             if (email.includes('@')) {
                 resolve({ success: true });
             } else {
@@ -194,111 +192,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // PROJECT MODAL OR NAVIGATION
 // ===================================
 function openProject(projectName) {
-    // You can implement a modal here or navigate to project page
     console.log(`Opening project: ${projectName}`);
-    
-    // Example: Open in modal
     alert(`Ver proyecto: ${projectName}`);
-    
-    // Or navigate to dedicated page:
-    // window.location.href = `/projects/${projectName}`;
 }
-
-// ===================================
-// LAZY LOADING FOR VIDEOS
-// ===================================
-const lazyVideos = document.querySelectorAll('video[data-src]');
-
-if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const video = entry.target;
-                video.src = video.dataset.src;
-                video.load();
-                videoObserver.unobserve(video);
-            }
-        });
-    });
-
-    lazyVideos.forEach(video => {
-        videoObserver.observe(video);
-    });
-}
-
-// ===================================
-// PERFORMANCE: PAUSE OFFSCREEN VIDEOS
-// ===================================
-function handleVideoVisibility() {
-    const videos = document.querySelectorAll('video');
-    
-    videos.forEach(video => {
-        const rect = video.getBoundingClientRect();
-        const isVisible = (
-            rect.top >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-        
-        if (!isVisible && !video.paused) {
-            video.pause();
-        }
-    });
-}
-
-// Check video visibility on scroll (throttled)
-let scrollTimer;
-window.addEventListener('scroll', () => {
-    if (scrollTimer) {
-        clearTimeout(scrollTimer);
-    }
-    scrollTimer = setTimeout(handleVideoVisibility, 100);
-});
-
-// ===================================
-// CURSOR EFFECTS (OPTIONAL)
-// ===================================
-function createCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-    
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    function updateCursor() {
-        cursorX += (mouseX - cursorX) * 0.1;
-        cursorY += (mouseY - cursorY) * 0.1;
-        
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-        
-        requestAnimationFrame(updateCursor);
-    }
-    
-    updateCursor();
-}
-
-// Uncomment to enable custom cursor
-// createCustomCursor();
 
 // ===================================
 // ANALYTICS / TRACKING (OPTIONAL)
 // ===================================
 function trackEvent(eventName, eventData) {
-    // Integrate with Google Analytics, Mixpanel, etc.
     console.log('Track Event:', eventName, eventData);
-    
-    // Example with Google Analytics
-    // if (typeof gtag !== 'undefined') {
-    //     gtag('event', eventName, eventData);
-    // }
 }
 
 // Track CTA clicks
