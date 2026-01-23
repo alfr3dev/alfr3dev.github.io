@@ -3,7 +3,9 @@
 // ===================================
 window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
-    if (window.scrollY > 100) {
+    const scrollThreshold = 200; // Aparece después de 200px de scroll
+    
+    if (window.scrollY > scrollThreshold) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
@@ -216,7 +218,7 @@ document.querySelectorAll('.cta-button').forEach(button => {
 // ===================================
 // CONSOLE MESSAGE
 // ===================================
-console.log('%c👋 Hola! Bienvenido a DERRK.COM', 'font-size: 20px; font-weight: bold; color: #000;');
+console.log('%c👋 Hola! Bienvenido a ALFR3DEV.COM', 'font-size: 20px; font-weight: bold; color: #000;');
 console.log('%c🎨 Sitio creado con pasión por la animación 3D', 'font-size: 14px; color: #666;');
 
 // ===================================
