@@ -16,6 +16,7 @@
     --spacing-xl: 120px;
     --spacing-lg: 80px;
     --spacing-md: 40px;
+    --hero-text-color: #ffffff;
 }
 
 body {
@@ -24,9 +25,15 @@ body {
     color: var(--text-primary);
     overflow-x: hidden;
     line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 html {
+    scroll-behavior: auto;
+}
+
+html.loaded {
     scroll-behavior: smooth;
 }
 
@@ -127,9 +134,17 @@ header.scrolled {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* OPCIONES DE POSICIÓN VERTICAL (descomenta la que quieras): */
+    justify-content: flex-end;      /* CENTRADO (default) */
+    /* justify-content: flex-start;  /* ARRIBA - descomenta esta línea */
+    /* justify-content: flex-end;    /* ABAJO - descomenta esta línea */
+    
+    /* OPCIONES DE POSICIÓN HORIZONTAL (descomenta la que quieras): */
+    align-items: flex-end;          /* CENTRADO (default) */
+    /* align-items: flex-start;      /* IZQUIERDA - descomenta esta línea */
+    /* align-items: flex-end;        /* DERECHA - descomenta esta línea */
+    
+    text-align: flex-end;
     padding: 0 40px;
     overflow: hidden;     /* Para que el video no se salga */
 }
@@ -137,32 +152,54 @@ header.scrolled {
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(60px, 10vw, 140px);
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: -3px;
     line-height: 0.95;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    color: var(--hero-text-color);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
+    transition: color 0.6s ease, text-shadow 0.6s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-subtitle {
     font-family: 'Syne', sans-serif;
     font-size: clamp(20px, 3vw, 32px);
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 2px;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
     opacity: 0;
     animation: fadeInUp 1s ease 0.3s forwards;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    color: var(--hero-text-color);
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: color 0.6s ease, text-shadow 0.6s ease;
+    position: relative;
+    z-index: 2;
+    
 }
 
 .scroll-indicator {
     position: absolute;
-    bottom: 40px;
-    font-size: 14px;
+    bottom: 20px;
+    font-size: 20px;
     text-transform: lowercase;
-    color: var(--text-secondary);
+    color: var(--hero-text-color);
     opacity: 0;
     animation: fadeInUp 1s ease 0.6s forwards, float 2s ease-in-out infinite;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    transition: color 0.6s ease, text-shadow 0.6s ease;
+    z-index: 2;
 }
 
 /* ===================================
@@ -187,6 +224,8 @@ section.visible {
     letter-spacing: -2px;
     line-height: 1.1;
     margin-bottom: 40px;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .section-title .bold {
@@ -259,7 +298,7 @@ section.visible {
    =================================== */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
     gap: 30px;
     margin-top: 60px;
 }
@@ -397,7 +436,7 @@ section.visible {
    =================================== */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 50px;
     margin-top: 80px;
 }
@@ -590,11 +629,60 @@ footer {
 }
 
 /* ===================================
+   EFECTO GRADIENTE ANIMADO (OPCIONAL)
+   =================================== */
+/* Descomenta esto si quieres un efecto de gradiente animado en el título */
+/*
+.hero-title {
+    background: linear-gradient(45deg, #ffffff, #00d4ff, #ffffff, #ff00ff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease forwards, gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+*/
+
+/* ===================================
    RESPONSIVE DESIGN
    =================================== */
+@media (max-width: 1024px) {
+    :root {
+        --spacing-xl: 80px;
+        --spacing-lg: 60px;
+        --spacing-md: 40px;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+    }
+}
+
 @media (max-width: 768px) {
+    :root {
+        --spacing-xl: 60px;
+        --spacing-lg: 40px;
+        --spacing-md: 30px;
+    }
+    
     header {
         padding: 20px 30px;
+    }
+
+    header.scrolled {
+        padding: 15px 30px;
     }
 
     .nav-menu {
@@ -602,7 +690,48 @@ footer {
     }
 
     section {
-        padding: var(--spacing-md) 30px;
+        padding: var(--spacing-lg) 30px;
+    }
+    
+    .hero {
+        padding: 0 30px;
+    }
+    
+    .hero-title {
+        font-size: clamp(40px, 12vw, 80px);
+        letter-spacing: -2px;
+        word-break: break-word;  /* Permite romper palabras largas */
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(16px, 4vw, 24px);
+        margin-bottom: 80px;
+        word-break: break-word;
+        max-width: 100%;
+    }
+    
+    .section-title {
+        font-size: clamp(32px, 8vw, 60px);
+        margin-bottom: 30px;
+    }
+    
+    .section-description {
+        font-size: clamp(16px, 3vw, 20px);
+        margin-bottom: 40px;
+    }
+    
+    .cta-button {
+        padding: 18px 40px;
+        font-size: 16px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .cta-note {
+        font-size: 12px;
+        margin-top: 10px;
     }
 
     .about-content {
@@ -612,20 +741,57 @@ footer {
 
     .portfolio-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 
     .newsletter-form {
         flex-direction: column;
     }
+    
+    .newsletter-title {
+        font-size: clamp(28px, 6vw, 40px);
+    }
+    
+    .service-title {
+        font-size: 24px;
+    }
+    
+    .service-description {
+        font-size: 15px;
+    }
+    
+    .social-links {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .video-description h3 {
+        font-size: 24px;
+    }
+    
+    .video-description p {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --spacing-xl: 50px;
+        --spacing-lg: 35px;
+        --spacing-md: 25px;
+    }
+    
     header {
         padding: 15px 20px;
+    }
+    
+    header.scrolled {
+        padding: 12px 20px;
     }
 
     .logo {
@@ -633,14 +799,179 @@ footer {
     }
 
     section {
-        padding: 40px 20px;
+        padding: var(--spacing-lg) 20px;
+    }
+    
+    .hero {
+        padding: 0 20px;
     }
 
     .hero-title {
-        font-size: 48px;
+        font-size: clamp(28px, 11vw, 50px);  /* Reducido el mínimo de 36px a 28px */
+        letter-spacing: -1px;  /* Reducido para que quepa mejor */
+        line-height: 1.1;  /* Aumentado ligeramente para mejor legibilidad */
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
     }
 
     .hero-subtitle {
-        font-size: 18px;
+        font-size: clamp(12px, 4vw, 18px);  /* Reducido el mínimo de 14px a 12px */
+        letter-spacing: 0.5px;  /* Reducido de 1px */
+        margin-bottom: 80px;
+        word-break: break-word;
+        max-width: 100%;
+    }
+    
+    .scroll-indicator {
+        font-size: 12px;
+        bottom: 30px;
+    }
+    
+    .section-title {
+        font-size: clamp(28px, 10vw, 48px);
+        letter-spacing: -1.5px;
+        margin-bottom: 25px;
+    }
+    
+    .section-description {
+        font-size: clamp(15px, 4vw, 18px);
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+    
+    .cta-button {
+        padding: 16px 30px;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+    }
+    
+    .cta-note {
+        font-size: 11px;
+        margin-top: 8px;
+        line-height: 1.3;
+    }
+    
+    .portfolio-grid {
+        gap: 15px;
+        margin-top: 40px;
+    }
+    
+    .portfolio-item {
+        aspect-ratio: 16/11;
+    }
+    
+    .portfolio-title {
+        font-size: 20px;
+        bottom: 15px;
+        left: 20px;
+        right: 20px;
+    }
+    
+    .services-grid {
+        gap: 35px;
+        margin-top: 40px;
+    }
+    
+    .service-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .service-description {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    
+    .service-link {
+        font-size: 14px;
+    }
+    
+    .newsletter {
+        padding: var(--spacing-lg) 20px;
+    }
+    
+    .newsletter-title {
+        font-size: clamp(24px, 8vw, 36px);
+        margin-bottom: 30px;
+    }
+    
+    .social-links {
+        gap: 15px;
+        font-size: 14px;
+    }
+    
+    .social-link {
+        font-size: 14px;
+    }
+    
+    footer {
+        padding: 40px 20px;
+        font-size: 12px;
+    }
+    
+    .video-player-container {
+        margin-bottom: 30px;
+    }
+    
+    .video-description h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .video-description p {
+        font-size: 14px;
+    }
+    
+    .about-content {
+        gap: 30px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+    .hero-title {
+        font-size: clamp(24px, 10vw, 45px);  /* Aún más pequeño para pantallas tiny */
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(11px, 3.5vw, 16px);
+        letter-spacing: 0.3px;
+    }
+    
+    .section-title {
+        font-size: clamp(26px, 11vw, 44px);
+    }
+    
+    .cta-button {
+        padding: 14px 25px;
+        font-size: 14px;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Ultra small devices (iPhone SE, small Android) */
+@media (max-width: 320px) {
+    .hero {
+        padding: 0 15px;
+    }
+    
+    .hero-title {
+        font-size: clamp(22px, 9vw, 40px);
+        letter-spacing: 0;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(10px, 3vw, 14px);
     }
 }
