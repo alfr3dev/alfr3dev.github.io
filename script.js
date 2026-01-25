@@ -1,4 +1,17 @@
 // ===================================
+// PREVENIR SCROLL AUTOMÁTICO AL CARGAR
+// ===================================
+// Forzar scroll al inicio antes de que se cargue todo
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
+// Scroll instantáneo al inicio
+window.scrollTo(0, 0);
+
+
+
+// ===================================
 // SCROLL EFFECTS FOR HEADER
 // ===================================
 window.addEventListener('scroll', () => {
@@ -79,17 +92,6 @@ portfolioItems.forEach(item => {
     }
 });
 
-// ===================================
-// BACKGROUND VIDEO CONTROL
-// ===================================
-const bgVideo = document.getElementById('bgVideo');
-
-if (bgVideo) {
-    // Asegurar que el video de fondo se reproduce
-    bgVideo.play().catch(error => {
-        console.log('Background video autoplay prevented:', error);
-    });
-}
 
 // ===================================
 // MAIN VIDEO PLAYER CONTROLS
@@ -226,6 +228,14 @@ console.log('%c🎨 Sitio creado con pasión por la animación 3D', 'font-size: 
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Website initialized successfully');
+    
+    // Asegurar que estamos en el inicio
+    window.scrollTo(0, 0);
+    
+    // Habilitar smooth scroll después de cargar
+    setTimeout(() => {
+        document.documentElement.classList.add('loaded');
+    }, 100);
     
     // Check if videos are supported
     const testVideo = document.createElement('video');
