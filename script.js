@@ -47,56 +47,23 @@ document.querySelectorAll('section').forEach(section => {
 });
 
 // ===================================
-// VIDEO AUTOPLAY - MEJORADO PARA MÓVILES
+// VIDEO AUTOPLAY - SIN INTERFERENCIA
 // ===================================
 const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-// Función para intentar reproducir video
-function tryPlayVideo(video) {
-    if (video && video.paused) {
-        const playPromise = video.play();
-        
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    console.log('Video playing:', video.src);
-                })
-                .catch(error => {
-                    console.log('Video autoplay prevented:', error);
-                    
-                    // Si falla el autoplay, intentar después de interacción del usuario
-                    const enableVideoOnInteraction = () => {
-                        video.play()
-                            .then(() => {
-                                console.log('Video started after user interaction');
-                                // Remover los listeners después de que funcione
-                                document.removeEventListener('touchstart', enableVideoOnInteraction);
-                                document.removeEventListener('click', enableVideoOnInteraction);
-                            })
-                            .catch(err => console.log('Still cannot play:', err));
-                    };
-                    
-                    // Agregar listeners una sola vez
-                    if (!video.dataset.listenerAdded) {
-                        document.addEventListener('touchstart', enableVideoOnInteraction, { once: true });
-                        document.addEventListener('click', enableVideoOnInteraction, { once: true });
-                        video.dataset.listenerAdded = 'true';
-                    }
-                });
-        }
-    }
-}
-
-// Observador mejorado para videos
+// Simplemente observa si los videos están en pantalla
 const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         const video = entry.target.querySelector('.portfolio-video');
         
         if (video) {
             if (entry.isIntersecting) {
-                // Está visible - intentar reproducir
-                video.load(); // Cargar el video primero
-                setTimeout(() => tryPlayVideo(video), 100);
+                // Está visible - asegurar que esté reproduciendo
+                if (video.paused) {
+                    video.play().catch(error => {
+                        console.log('Video autoplay prevented:', error);
+                    });
+                }
             } else {
                 // No está visible - pausar para ahorrar recursos
                 video.pause();
@@ -104,35 +71,16 @@ const videoObserver = new IntersectionObserver((entries) => {
         }
     });
 }, {
-    threshold: 0.2,
-    rootMargin: '50px' // Empezar a cargar un poco antes
+    threshold: 0.2 // Solo necesita 20% visible para empezar
 });
 
-// Observar cada portfolio item y agregar eventos
+// Observar cada portfolio item
 portfolioItems.forEach(item => {
     const video = item.querySelector('.portfolio-video');
     
     if (video) {
-        // Configurar el video
-        video.setAttribute('muted', 'true');
-        video.muted = true;
-        video.setAttribute('playsinline', 'true');
-        video.playsInline = true;
-        
         // Observar visibilidad
         videoObserver.observe(item);
-        
-        // Intentar reproducir cuando el video esté listo
-        video.addEventListener('loadedmetadata', () => {
-            console.log('Video metadata loaded:', video.src);
-        });
-        
-        video.addEventListener('loadeddata', () => {
-            console.log('Video data loaded:', video.src);
-            if (isVideoInViewport(item)) {
-                tryPlayVideo(video);
-            }
-        });
         
         // Click para abrir proyecto
         item.addEventListener('click', () => {
@@ -141,40 +89,9 @@ portfolioItems.forEach(item => {
                 openProject(projectName);
             }
         });
-        
-        // Touch/click también puede activar el video
-        item.addEventListener('touchstart', () => {
-            tryPlayVideo(video);
-        }, { passive: true });
     }
 });
 
-// Función helper para verificar si el elemento está en viewport
-function isVideoInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-// ===================================
-// BACKGROUND VIDEO - HERO SECTION
-// ===================================
-const bgVideo = document.getElementById('bgVideo');
-if (bgVideo) {
-    bgVideo.addEventListener('loadeddata', () => {
-        console.log('Background video loaded');
-        tryPlayVideo(bgVideo);
-    });
-    
-    // Asegurar que el video de fondo se reproduzca
-    setTimeout(() => {
-        tryPlayVideo(bgVideo);
-    }, 500);
-}
 
 // ===================================
 // MAIN VIDEO PLAYER CONTROLS
@@ -193,10 +110,6 @@ if (mainVideo) {
     mainVideo.addEventListener('ended', () => {
         console.log('Main video ended');
     });
-    
-    // Para iOS, asegurar que playsinline esté configurado
-    mainVideo.setAttribute('playsinline', 'true');
-    mainVideo.playsInline = true;
 }
 
 // ===================================
@@ -328,27 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const testVideo = document.createElement('video');
     if (testVideo.canPlayType) {
         console.log('Video support: ✓');
-        console.log('MP4 support:', testVideo.canPlayType('video/mp4'));
     } else {
         console.warn('Video support: ✗ - Videos may not play correctly');
-    }
-    
-    // Detectar tipo de dispositivo
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    console.log('Mobile device:', isMobile);
-    console.log('iOS device:', isIOS);
-    
-    // Para dispositivos móviles, intentar activar todos los videos después de primer toque
-    if (isMobile) {
-        const activateAllVideos = () => {
-            console.log('Activating all videos after user interaction');
-            document.querySelectorAll('video').forEach(video => {
-                tryPlayVideo(video);
-            });
-        };
-        
-        document.addEventListener('touchstart', activateAllVideos, { once: true });
-        document.addEventListener('click', activateAllVideos, { once: true });
     }
 });
