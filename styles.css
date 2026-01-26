@@ -41,11 +41,11 @@ html.loaded {
    VIDEO BACKGROUND - SOLO EN HERO
    =================================== */
 .video-background {
-    position: absolute;  /* Cambiado de fixed a absolute */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;        /* 100% del contenedor (hero) */
+    height: 100%;
     z-index: -1;
     overflow: hidden;
 }
@@ -54,12 +54,11 @@ html.loaded {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1; /* Aumentado para que sea más visible */
+    opacity: 1;
 }
 
 .video-overlay {
     background: none;
-    /* O simplemente elimina esta clase del HTML */
 }
 
 /* ===================================
@@ -130,29 +129,21 @@ header.scrolled {
    HERO SECTION
    =================================== */
 .hero {
-    position: relative;  /* Necesario para contener el video background */
+    position: relative;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* OPCIONES DE POSICIÓN VERTICAL (descomenta la que quieras): */
-    justify-content: flex-end;      /* CENTRADO (default) */
-    /* justify-content: flex-start;  /* ARRIBA - descomenta esta línea */
-    /* justify-content: flex-end;    /* ABAJO - descomenta esta línea */
-    
-    /* OPCIONES DE POSICIÓN HORIZONTAL (descomenta la que quieras): */
-    align-items: flex-end;          /* CENTRADO (default) */
-    /* align-items: flex-start;      /* IZQUIERDA - descomenta esta línea */
-    /* align-items: flex-end;        /* DERECHA - descomenta esta línea */
-    
+    justify-content: flex-end;
+    align-items: flex-end;
     text-align: flex-end;
     padding: 0 40px;
-    overflow: hidden;     /* Para que el video no se salga */
+    overflow: hidden;
 }
 
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(60px, 10vw, 140px);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -3px;
     line-height: 0.95;
     margin-bottom: 40px;
@@ -186,7 +177,6 @@ header.scrolled {
     transition: color 0.6s ease, text-shadow 0.6s ease;
     position: relative;
     z-index: 2;
-    
 }
 
 .scroll-indicator {
@@ -294,7 +284,7 @@ section.visible {
 }
 
 /* ===================================
-   PORTFOLIO GRID CON VIDEOS
+   PORTFOLIO GRID CON VIDEOS - MEJORADO PARA MÓVILES
    =================================== */
 .portfolio-grid {
     display: grid;
@@ -311,18 +301,31 @@ section.visible {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.5s ease;
+    /* Asegurar que el contenedor tenga el tamaño correcto */
+    min-height: 200px;
 }
 
-/* Video dentro del portfolio item */
+/* Video dentro del portfolio item - MEJORADO PARA MÓVILES */
 .portfolio-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    /* Asegurar que el video sea visible */
+    display: block;
+    background: #000;
 }
 
-.portfolio-item:hover .portfolio-video {
-    transform: scale(1.05);
+/* Hover solo en dispositivos no táctiles */
+@media (hover: hover) and (pointer: fine) {
+    .portfolio-item:hover .portfolio-video {
+        transform: scale(1.05);
+    }
+    
+    .portfolio-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
 }
 
 .portfolio-item::before {
@@ -336,15 +339,13 @@ section.visible {
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 1;
+    pointer-events: none;
 }
 
-.portfolio-item:hover::before {
-    opacity: 1;
-}
-
-.portfolio-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+@media (hover: hover) and (pointer: fine) {
+    .portfolio-item:hover::before {
+        opacity: 1;
+    }
 }
 
 .portfolio-title {
@@ -360,11 +361,26 @@ section.visible {
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.4s ease;
+    pointer-events: none;
 }
 
-.portfolio-item:hover .portfolio-title {
-    opacity: 1;
-    transform: translateY(0);
+@media (hover: hover) and (pointer: fine) {
+    .portfolio-item:hover .portfolio-title {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* En móviles, mostrar siempre el título */
+@media (hover: none) and (pointer: coarse) {
+    .portfolio-item::before {
+        opacity: 1;
+    }
+    
+    .portfolio-title {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Fallback gradients si no hay video */
@@ -404,7 +420,7 @@ section.visible {
     margin: 0 auto 40px;
     border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
 }
 
 .video-player-container video {
@@ -415,15 +431,13 @@ section.visible {
 
 .video-description {
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .video-description h3 {
     font-family: 'Syne', sans-serif;
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .video-description p {
@@ -436,14 +450,20 @@ section.visible {
    =================================== */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 60px;
     margin-top: 80px;
 }
 
 .service-card {
-    padding: 0;
-    text-align: left;
+    padding: 40px;
+    background: var(--secondary-bg);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
 }
 
 .service-title {
@@ -455,74 +475,40 @@ section.visible {
 
 .service-description {
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: 30px;
 }
 
 .service-link {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
     color: var(--accent-color);
     text-decoration: none;
-    font-weight: 600;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 2px;
     transition: all 0.3s ease;
 }
 
 .service-link:hover {
-    border-bottom-color: transparent;
+    transform: translateX(5px);
 }
 
 /* ===================================
    ABOUT SECTION
    =================================== */
 .about-content {
-    max-width: 1200px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
+    margin-top: 60px;
 }
 
 .about-image {
     width: 100%;
+    height: auto;
     border-radius: 0;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-}
-
-/* ===================================
-   SOCIAL LINKS
-   =================================== */
-.social-links {
-    display: flex;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-.social-link {
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.social-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-color);
-    transition: width 0.3s ease;
-}
-
-.social-link:hover::after {
-    width: 100%;
 }
 
 /* ===================================
@@ -530,69 +516,38 @@ section.visible {
    =================================== */
 .newsletter {
     background: var(--secondary-bg);
-    padding: var(--spacing-lg) 60px;
     text-align: center;
 }
 
 .newsletter-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 700;
-    margin-bottom: 40px;
-    line-height: 1.2;
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 60px;
 }
 
-.newsletter-form {
-    max-width: 500px;
-    margin: 0 auto;
+.social-links {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 40px;
 }
 
-.newsletter-input {
-    flex: 1;
-    padding: 18px 25px;
-    border: 2px solid var(--text-primary);
-    background: white;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
-}
-
-.newsletter-input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-.newsletter-button {
-    padding: 18px 40px;
-    background: var(--accent-color);
-    color: white;
-    border: none;
+.social-link {
     font-family: 'Syne', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 16px;
-    text-transform: uppercase;
-    cursor: pointer;
+    color: var(--text-primary);
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 
-.newsletter-button:hover {
+.social-link:hover {
+    color: var(--accent-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-message {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.form-message.success {
-    color: #43e97b;
-}
-
-.form-message.error {
-    color: #f5576c;
 }
 
 /* ===================================
@@ -627,27 +582,6 @@ footer {
         transform: translateY(-20px);
     }
 }
-
-/* ===================================
-   EFECTO GRADIENTE ANIMADO (OPCIONAL)
-   =================================== */
-/* Descomenta esto si quieres un efecto de gradiente animado en el título */
-/*
-.hero-title {
-    background: linear-gradient(45deg, #ffffff, #00d4ff, #ffffff, #ff00ff);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: fadeInUp 1s ease forwards, gradientShift 8s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-*/
 
 /* ===================================
    RESPONSIVE DESIGN
@@ -700,7 +634,7 @@ footer {
     .hero-title {
         font-size: clamp(40px, 12vw, 80px);
         letter-spacing: -2px;
-        word-break: break-word;  /* Permite romper palabras largas */
+        word-break: break-word;
         overflow-wrap: break-word;
         max-width: 100%;
     }
@@ -742,6 +676,11 @@ footer {
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    /* IMPORTANTE: Asegurar que los videos sean visibles en móviles */
+    .portfolio-item {
+        min-height: 250px;
     }
 
     .services-grid {
@@ -807,9 +746,9 @@ footer {
     }
 
     .hero-title {
-        font-size: clamp(28px, 11vw, 50px);  /* Reducido el mínimo de 36px a 28px */
-        letter-spacing: -1px;  /* Reducido para que quepa mejor */
-        line-height: 1.1;  /* Aumentado ligeramente para mejor legibilidad */
+        font-size: clamp(28px, 11vw, 50px);
+        letter-spacing: -1px;
+        line-height: 1.1;
         word-break: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
@@ -817,8 +756,8 @@ footer {
     }
 
     .hero-subtitle {
-        font-size: clamp(12px, 4vw, 18px);  /* Reducido el mínimo de 14px a 12px */
-        letter-spacing: 0.5px;  /* Reducido de 1px */
+        font-size: clamp(12px, 4vw, 18px);
+        letter-spacing: 0.5px;
         margin-bottom: 80px;
         word-break: break-word;
         max-width: 100%;
@@ -860,6 +799,7 @@ footer {
     
     .portfolio-item {
         aspect-ratio: 16/11;
+        min-height: 220px;
     }
     
     .portfolio-title {
@@ -933,7 +873,7 @@ footer {
 /* Extra small devices */
 @media (max-width: 375px) {
     .hero-title {
-        font-size: clamp(24px, 10vw, 45px);  /* Aún más pequeño para pantallas tiny */
+        font-size: clamp(24px, 10vw, 45px);
         letter-spacing: -0.5px;
         line-height: 1.15;
         word-break: break-word;
@@ -957,6 +897,10 @@ footer {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+    
+    .portfolio-item {
+        min-height: 200px;
+    }
 }
 
 /* Ultra small devices (iPhone SE, small Android) */
@@ -974,4 +918,23 @@ footer {
     .hero-subtitle {
         font-size: clamp(10px, 3vw, 14px);
     }
+    
+    .portfolio-item {
+        min-height: 180px;
+    }
+}
+
+.youtube-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+}
+
+.youtube-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
