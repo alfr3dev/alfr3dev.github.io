@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALFR3DEV - What i make</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
     <header id="header">
-        <div class="logo">Alfr3dev</div>
+        <div class="logo">ALFR3DEV</div>
         <nav class="nav-menu">
             <a href="#portfolio" class="nav-link">Portafolio</a>
             <a href="#services" class="nav-link">Servicios</a>
@@ -22,7 +25,7 @@
     <section class="hero">
         <!-- Video Background solo para Hero -->
         <div class="video-background">
-            <video autoplay muted loop playsinline preload="auto" id="bgVideo">
+            <video autoplay muted loop playsinline id="bgVideo">
                 <source src="assets/bkgweb8.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
@@ -35,65 +38,63 @@
         <div class="scroll-indicator">scroll para más</div>
     </section>
 
-    <!-- Designed to Delight Section -->
+
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+            <!-- Designed to Delight Section -->
     <section id="delight">
         <h2 class="section-title">DISEÑADO PARA <span class="bold">ENCANTAR</span></h2>
         <p class="section-description">
             ¿Estás lanzando un <span class="highlight">nuevo producto</span> y necesitas visuales para que la gente se emocione tanto como tú? Te tengo cubierto.
         </p>
-        <a href="#contact" class="cta-button">
-            HABLAR CON 
-            <span class="cta-note">(este botón te permitirá <span class="highlight">agendar una llamada conmigo</span>)</span>
-        </a>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio">
+    </section>
         <div class="portfolio-grid">
             <!-- Portfolio Item 1 -->
             <div class="portfolio-item" data-project="Nozzle">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/nozzlel.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Nozzle</div>
             </div>
 
             <!-- Portfolio Item 2 -->
             <div class="portfolio-item" data-project="roman">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/billar.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Roman: FOCUS</div>
             </div>
 
             <!-- Portfolio Item 3 -->
             <div class="portfolio-item" data-project="herman">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/insidemotor.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/motor.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller x Logitech</div>
             </div>
 
             <!-- Portfolio Item 4 -->
             <div class="portfolio-item" data-project="muuto">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/muuto.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/goproturn.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Muuto</div>
             </div>
 
             <!-- Portfolio Item 5 -->
             <div class="portfolio-item" data-project="cosm">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/cosm.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/chasis.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller COSM</div>
             </div>
 
             <!-- Portfolio Item 6 -->
             <div class="portfolio-item" data-project="type">
-                <video class="portfolio-video" muted loop playsinline preload="metadata">
-                    <source src="assets/9days.mp4" type="video/mp4">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/boxfocus.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">9 Days of Type</div>
             </div>
@@ -102,26 +103,83 @@
 
     <!-- Video Showcase Section -->
     <section id="video-showcase">
+    <section id="video-showcase">
+        <h2 class="section-title">DISEÑADO PARA <span class="bold">ENCANTAR</span></h2>
+        <p class="section-description">
+            ¿Estás lanzando un <span class="highlight">nuevo producto</span> y necesitas visuales para que la gente se emocione tanto como tú? Te tengo cubierto.
+        </p>
+
+    </section>
         <div class="youtube-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/zl6lIX3u5UA?si=wa59d9akAsw76rSP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="150" src="https://www.youtube.com/embed/zl6lIX3u5UA?si=81mu1KqlaHeM_elR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
-    <!-- Services Section -->
+
+
+    <!-- Not Into Products Section -->
+    <section id="other-projects">
+        <section id="other-projects">
+        <h2 class="section-title">¿NO TE GUSTAN LOS <span class="bold">PRODUCTOS?</span></h2>
+        <p class="section-description">
+            Mi experiencia está orientada a lanzamientos de productos y presentaciones que buscan inversión, pero la gente ha hecho algunos usos bastante creativos de mis habilidades.
+            <br><br>
+            No tengas miedo de contactarme si crees que tienes un proyecto interesante que podría gustarme.
+        </p>
+        </section>
+    
+
+        <div class="portfolio-grid" style="margin-top: 80px;">
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Roman</div>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">NOMAD</div>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">CTRL-Labs</div>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">AppDynamics</div>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">NINEBOXES</div>
+            </div>
+            <div class="portfolio-item">
+                <video class="portfolio-video" autoplay muted loop playsinline>
+                    <source src="assets/nozzlefall.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-title">Wax.io</div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Services Section -->
     <section id="services">
+        <section id="services">
         <h2 class="section-title"><span class="bold">CÓMO</span> PUEDO <span class="bold">AYUDAR</span></h2>
         <p class="section-description">
             ¿Listo para empezar con animación 3D? Hay algunas formas en las que podemos hacer que esto suceda.
         </p>
+        </section>
         
         <div class="services-grid">
-            <div class="service-card">
-                <h3 class="service-title">Tutoriales Gratuitos</h3>
-                <p class="service-description">
-                    Si estás interesado en aprender por tu cuenta, únete a mí y a más de <strong>150,000</strong> suscriptores para tutoriales de Blender en profundidad y de alta calidad.
-                </p>
-                <a href="https://youtube.com" class="service-link" target="_blank">Ver Tutoriales →</a>
-            </div>
+
 
             <div class="service-card">
                 <h3 class="service-title">Proyectos Personalizados</h3>
@@ -142,45 +200,11 @@
         </div>
     </section>
 
-    <!-- Not Into Products Section -->
-    <section id="other-projects">
-        <h2 class="section-title">¿NO TE GUSTAN LOS <span class="bold">PRODUCTOS?</span></h2>
-        <p class="section-description">
-            Mi experiencia está orientada a lanzamientos de productos y presentaciones que buscan inversión, pero la gente ha hecho algunos usos bastante creativos de mis habilidades.
-            <br><br>
-            No tengas miedo de contactarme si crees que tienes un proyecto interesante que podría gustarme.
-        </p>
-        <a href="#contact" class="cta-button">
-            HABLAR CON 
-            <span class="cta-note">(nuestra primera llamada es solo para ver si <span class="highlight">'conectamos'</span>)</span>
-        </a>
-
-        <div class="portfolio-grid" style="margin-top: 80px;">
-            <div class="portfolio-item">
-                <div class="portfolio-title">Roman</div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-title">NOMAD</div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-title">CTRL-Labs</div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-title">AppDynamics</div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-title">NINEBOXES</div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-title">Wax.io</div>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title"><span class="bold">Alfredo</span> E</h2>
-        
+        <section id="about">
+        <h2 class="section-title"><span class="bold">Me</span> </h2>
+        </section>
         <div class="about-content">
             <div>
                 <p class="section-description">
@@ -201,7 +225,7 @@
             </div>
             
             <div>
-                <img src="assets/derek.jpg" alt="Derek Elliott" class="about-image">
+                <img src="assets/yo.jpeg" alt="Derek Elliott" class="about-image">
             </div>
         </div>
     </section>
