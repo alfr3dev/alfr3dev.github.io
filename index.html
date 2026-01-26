@@ -22,7 +22,7 @@
     <section class="hero">
         <!-- Video Background solo para Hero -->
         <div class="video-background">
-            <video autoplay muted loop playsinline id="bgVideo">
+            <video autoplay muted loop playsinline preload="auto" id="bgVideo">
                 <source src="assets/bkgweb8.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
@@ -52,7 +52,7 @@
         <div class="portfolio-grid">
             <!-- Portfolio Item 1 -->
             <div class="portfolio-item" data-project="Nozzle">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/nozzle.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Nozzle</div>
@@ -60,7 +60,7 @@
 
             <!-- Portfolio Item 2 -->
             <div class="portfolio-item" data-project="roman">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/nozzlefall.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Roman: FOCUS</div>
@@ -68,7 +68,7 @@
 
             <!-- Portfolio Item 3 -->
             <div class="portfolio-item" data-project="herman">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/insidemotor.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller x Logitech</div>
@@ -76,7 +76,7 @@
 
             <!-- Portfolio Item 4 -->
             <div class="portfolio-item" data-project="muuto">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/muuto.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Muuto</div>
@@ -84,7 +84,7 @@
 
             <!-- Portfolio Item 5 -->
             <div class="portfolio-item" data-project="cosm">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/cosm.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">Herman Miller COSM</div>
@@ -92,7 +92,7 @@
 
             <!-- Portfolio Item 6 -->
             <div class="portfolio-item" data-project="type">
-                <video class="portfolio-video" autoplay muted loop playsinline>
+                <video class="portfolio-video" muted loop playsinline preload="metadata">
                     <source src="assets/9days.mp4" type="video/mp4">
                 </video>
                 <div class="portfolio-title">9 Days of Type</div>
@@ -102,15 +102,8 @@
 
     <!-- Video Showcase Section -->
     <section id="video-showcase">
-        <div class="video-player-container">
-            <video id="mainVideo" controls poster="assets/poster.jpg">
-                <source src="assets/nozzle.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-            </video>
-        </div>
-        <div class="video-description">
-            <h3>Trabajo Destacado</h3>
-            <p>calidad cinematográfica</p>
+        <div class="youtube-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/zl6lIX3u5UA?si=wa59d9akAsw76rSP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
