@@ -711,10 +711,11 @@ footer {
         font-size: clamp(40px, 12vw, 80px);
         letter-spacing: -2px;
         margin-right: 0;
-        margin-bottom: 28px;
-        word-break: break-word;  /* Permite romper palabras largas */
-        overflow-wrap: break-word;
+        margin-left: 0;
         max-width: 100%;
+        width: 100%;
+        text-align: left;
+        min-width: 0;
     }
     
     .hero-subtitle {
