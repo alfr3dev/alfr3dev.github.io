@@ -220,8 +220,6 @@ document.querySelectorAll('.cta-button').forEach(button => {
 // ===================================
 // CONSOLE MESSAGE
 // ===================================
-console.log('%c👋 Hola! Bienvenido a ALFR3DEV.COM', 'font-size: 20px; font-weight: bold; color: #000;');
-console.log('%c🎨 Sitio creado con pasión por la animación 3D', 'font-size: 14px; color: #666;');
 
 // ===================================
 // INITIALIZE ON DOM LOAD
