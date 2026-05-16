@@ -157,7 +157,7 @@ header.scrolled {
     letter-spacing: clamp(1px, 0.35vw, 5px);
     line-height: 0.95;
     margin-bottom: 40px;
-    margin-right: clamp(0px, 80vw, 900px);
+    margin-right: clamp(0px, 90vw, 1000px);
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
     word-wrap: break-word;
