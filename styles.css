@@ -167,7 +167,7 @@ header.scrolled {
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
     transition: color 0.6s ease, text-shadow 0.6s ease;
     position: relative;
-    left: -80px;
+    left: -100px;
     z-index: 2;
 }
 
