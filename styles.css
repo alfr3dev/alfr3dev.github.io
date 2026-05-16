@@ -7,6 +7,13 @@
     box-sizing: border-box;
 }
 
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
 :root {
     --primary-bg: #ffffff;
     --secondary-bg: #f8f8f8;
@@ -131,31 +138,26 @@ header.scrolled {
    =================================== */
 .hero {
     position: relative;  /* Necesario para contener el video background */
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
-    /* OPCIONES DE POSICIÓN VERTICAL (descomenta la que quieras): */
-    justify-content: flex-end;      /* CENTRADO (default) */
-    /* justify-content: flex-start;  /* ARRIBA - descomenta esta línea */
-    /* justify-content: flex-end;    /* ABAJO - descomenta esta línea */
-    
-    /* OPCIONES DE POSICIÓN HORIZONTAL (descomenta la que quieras): */
-    align-items: flex-end;          /* CENTRADO (default) */
-    /* align-items: flex-start;      /* IZQUIERDA - descomenta esta línea */
-    /* align-items: flex-end;        /* DERECHA - descomenta esta línea */
-    
-    text-align: flex-end;
-    padding: 0 40px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0 clamp(20px, 4vw, 60px);
+    padding-inline: clamp(20px, 4vw, 60px);
     overflow: hidden;     /* Para que el video no se salga */
+    isolation: isolate;
 }
 
 .hero-title {
     font-family: "Cal Sans", sans-serif;
     font-size: clamp(60px, 10vw, 140px);
     font-weight: 600;
-    letter-spacing: 5px;
+    letter-spacing: clamp(1px, 0.35vw, 5px);
     line-height: 0.95;
     margin-bottom: 40px;
+    margin-right: clamp(0px, 14vw, 250px);
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
     word-wrap: break-word;
@@ -167,7 +169,6 @@ header.scrolled {
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
     transition: color 0.6s ease, text-shadow 0.6s ease;
     position: relative;
-    left: -250px;
     z-index: 2;
 }
 
@@ -192,6 +193,7 @@ header.scrolled {
 
 .scroll-indicator {
     position: absolute;
+    right: clamp(20px, 4vw, 60px);
     bottom: 20px;
     font-size: 20px;
     text-transform: lowercase;
@@ -662,12 +664,16 @@ footer {
         --spacing-lg: 60px;
         --spacing-md: 40px;
     }
-    
+
+    .hero-title {
+        margin-right: clamp(0px, 8vw, 120px);
+    }
+
     .portfolio-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
     }
-    
+
     .services-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 40px;
@@ -704,6 +710,8 @@ footer {
     .hero-title {
         font-size: clamp(40px, 12vw, 80px);
         letter-spacing: -2px;
+        margin-right: 0;
+        margin-bottom: 28px;
         word-break: break-word;  /* Permite romper palabras largas */
         overflow-wrap: break-word;
         max-width: 100%;
@@ -814,6 +822,8 @@ footer {
         font-size: clamp(28px, 11vw, 50px);  /* Reducido el mínimo de 36px a 28px */
         letter-spacing: -1px;  /* Reducido para que quepa mejor */
         line-height: 1.1;  /* Aumentado ligeramente para mejor legibilidad */
+        margin-right: 0;
+        margin-bottom: 22px;
         word-break: break-word;
         overflow-wrap: break-word;
         hyphens: auto;
@@ -939,6 +949,7 @@ footer {
     .hero-title {
         font-size: clamp(24px, 10vw, 45px);  /* Aún más pequeño para pantallas tiny */
         letter-spacing: -0.5px;
+        margin-right: 0;
         line-height: 1.15;
         word-break: break-word;
         overflow-wrap: break-word;
@@ -972,11 +983,61 @@ footer {
     .hero-title {
         font-size: clamp(22px, 9vw, 40px);
         letter-spacing: 0;
+        margin-right: 0;
         line-height: 1.2;
     }
     
     .hero-subtitle {
         font-size: clamp(10px, 3vw, 14px);
+    }
+}
+
+
+/* ===================================
+   AJUSTES PARA MÓVILES EN HORIZONTAL
+   =================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding-inline: 24px;
+    }
+
+    .hero-title {
+        font-size: clamp(34px, 8vw, 90px);
+        line-height: 0.95;
+        letter-spacing: clamp(-1px, 0.2vw, 2px);
+        margin-right: 0;
+        margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(14px, 3vw, 24px);
+        margin-bottom: 54px;
+    }
+
+    .scroll-indicator {
+        right: 24px;
+        bottom: 14px;
+        font-size: 13px;
+    }
+}
+
+/* ===================================
+   ACCESIBILIDAD: REDUCIR ANIMACIONES
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+    html.loaded {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
     }
 }
 
