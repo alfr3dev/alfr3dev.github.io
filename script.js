@@ -1,1057 +1,297 @@
-/* ===================================
-   VARIABLES GLOBALES
-   =================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+// ===================================
+// PREVENIR SCROLL AUTOMÁTICO AL CARGAR
+// ===================================
+// Forzar scroll al inicio antes de que se cargue todo
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
 }
 
+// Scroll instantáneo al inicio
+window.scrollTo(0, 0);
 
-img,
-video,
-iframe {
-    max-width: 100%;
-}
 
-:root {
-    --primary-bg: #ffffff;
-    --secondary-bg: #f8f8f8;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666;
-    --accent-color: #000;
-    --spacing-xl: 120px;
-    --spacing-lg: 80px;
-    --spacing-md: 40px;
-    --hero-text-color: #ffffff;
-}
 
-body {
-    font-family: "Cal Sans", sans-serif;
-    background: var(--primary-bg);
-    color: var(--text-primary);
-    overflow-x: hidden;
-    line-height: 1.6;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-html {
-    scroll-behavior: auto;
-}
-
-html.loaded {
-    scroll-behavior: smooth;
-}
-
-/* ===================================
-   VIDEO BACKGROUND - SOLO EN HERO
-   =================================== */
-.video-background {
-    position: absolute;  /* Cambiado de fixed a absolute */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;        /* 100% del contenedor (hero) */
-    z-index: -1;
-    overflow: hidden;
-}
-
-.video-background video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 1; /* Aumentado para que sea más visible */
-}
-
-.video-overlay {
-    background: none;
-    /* O simplemente elimina esta clase del HTML */
-}
-
-/* ===================================
-   HEADER - OCULTO AL INICIO
-   =================================== */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 30px 60px;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    transition: all 0.4s ease;
-    transform: translateY(-100%);
-    opacity: 0;
-}
-
-header.scrolled {
-    padding: 20px 60px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.logo {
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 800;
-    font-size: 24px;
-    letter-spacing: -0.5px;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 40px;
-}
-
-.nav-link {
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-color);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* ===================================
-   HERO SECTION
-   =================================== */
-.hero {
-    position: relative;  /* Necesario para contener el video background */
-    min-height: 100vh;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 0 clamp(20px, 4vw, 60px);
-    padding-inline: clamp(20px, 4vw, 60px);
-    overflow: hidden;     /* Para que el video no se salga */
-    isolation: isolate;
-}
-
-.hero-title {
-    font-family: "Cal Sans", sans-serif;
-    font-size: clamp(60px, 10vw, 140px);
-    font-weight: 600;
-    letter-spacing: clamp(1px, 0.35vw, 5px);
-    line-height: 0.95;
-    margin-bottom: 40px;
-    margin-right: clamp(0px, 90vw, 1000px);
-    opacity: 0;
-    animation: fadeInUp 1s ease forwards;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    max-width: 100%;
-    color: var(--hero-text-color);
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
-    transition: color 0.6s ease, text-shadow 0.6s ease;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-subtitle {
-    font-family: "Cal Sans", sans-serif;
-    font-size: clamp(20px, 3vw, 32px);
-    font-weight: 700;
-    letter-spacing: 5px;
-    margin-bottom: 100px;
-    opacity: 0;
-    animation: fadeInUp 1s ease 0.3s forwards;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-    color: var(--hero-text-color);
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 0, 0, 0.2);
-    transition: color 0.6s ease, text-shadow 0.6s ease;
-    position: relative;
-    z-index: 2;
+// ===================================
+// SCROLL EFFECTS FOR HEADER
+// ===================================
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    const scrollThreshold = 200; // Aparece después de 200px de scroll
     
-}
-
-.scroll-indicator {
-    position: absolute;
-    right: clamp(20px, 4vw, 60px);
-    bottom: 20px;
-    font-size: 20px;
-    text-transform: lowercase;
-    color: var(--hero-text-color);
-    opacity: 0;
-    animation: fadeInUp 1s ease 0.6s forwards, float 2s ease-in-out infinite;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    transition: color 0.6s ease, text-shadow 0.6s ease;
-    z-index: 2;
-}
-
-/* ===================================
-   SECTIONS
-   =================================== */
-section {
-    padding: var(--spacing-xl) 60px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-}
-
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.section-title {
-    font-family: "Cal Sans", sans-serif;
-    font-size: clamp(40px, 6vw, 80px);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.1;
-    margin-bottom: 40px;
-    word-wrap: break-word;
-    hyphens: auto;
-}
-
-.section-title .bold {
-    font-weight: 800;
-}
-
-.section-description {
-    font-size: clamp(18px, 2vw, 24px);
-    line-height: 1.6;
-    max-width: 800px;
-    margin-bottom: 60px;
-    color: var(--text-secondary);
-}
-
-.section-description .highlight {
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-/* ===================================
-   CTA BUTTON
-   =================================== */
-.cta-button {
-    display: inline-block;
-    padding: 20px 50px;
-    background: var(--accent-color);
-    color: white;
-    text-decoration: none;
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 0;
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.cta-button:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.cta-note {
-    display: block;
-    margin-top: 15px;
-    font-size: 14px;
-    color: var(--text-secondary);
-    font-weight: 400;
-}
-
-/* ===================================
-   PORTFOLIO GRID CON VIDEOS
-   =================================== */
-.portfolio-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    margin-top: 0px;
-}
-
-/* Tarjeta: imagen/video a pantalla completa dentro de un contenedor
-   redondeado, con el título y una descripción ancladas abajo-izquierda,
-   siempre visibles (como en el boceto de referencia). Ahora ocupa
-   todo el ancho disponible, en formato de lista. */
-.portfolio-card {
-    position: relative;
-    width: 100%;
-    height: clamp(260px, 42vw, 480px);
-    background: #000;
-    border-radius: 28px;
-    overflow: hidden;
-    cursor: pointer;
-    transform-origin: center;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.45s ease,
-                height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: transform, height;
-}
-
-.portfolio-card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
-    z-index: 5;
-}
-
-/* Media (video o imagen) cubre toda la tarjeta */
-.portfolio-video,
-.portfolio-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-.portfolio-card.is-expanded .portfolio-video,
-.portfolio-card.is-expanded .portfolio-image {
-    object-fit: contain;
-}
-
-/* Degradado inferior-izquierdo para que el texto siempre sea legible
-   sin importar el contenido de fondo */
-.portfolio-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.75) 0%,
-        rgba(0, 0, 0, 0.35) 30%,
-        rgba(0, 0, 0, 0) 65%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-.portfolio-info {
-    position: absolute;
-    left: 28px;
-    right: 28px;
-    bottom: 24px;
-    z-index: 2;
-    color: #ffffff;
-}
-
-.portfolio-title {
-    font-family: "Cal Sans", sans-serif;
-    font-size: clamp(20px, 2.2vw, 26px);
-    font-weight: 700;
-    margin-bottom: 6px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.portfolio-desc {
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 320px;
-}
-
-/* ===================================
-   VIDEO SHOWCASE SECTION
-   =================================== */
-#video-showcase {
-    background: var(--secondary-bg);
-}
-
-.video-player-container {
-    max-width: 1200px;
-
-    margin: 0 auto 40px;
-    border-radius: 0;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
-
-.video-player-container video {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.video-description {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.video-description h3 {
-    font-family: "Cal Sans", sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.video-description p {
-    font-size: 18px;
-    color: var(--text-secondary);
-}
-
-/* ===================================
-   SERVICES SECTION
-   =================================== */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-    gap: 50px;
-    margin-top: 80px;
-}
-
-.service-card {
-    padding: 0;
-    text-align: left;
-}
-
-.service-title {
-    font-family: "Cal Sans", sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.service-description {
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-}
-
-.service-link {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 2px;
-    transition: all 0.3s ease;
-}
-
-.service-link:hover {
-    border-bottom-color: transparent;
-}
-
-/* ===================================
-   ABOUT SECTION
-   =================================== */
-.about-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.about-image {
-    width: 100%;
-    border-radius: 0;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-}
-
-/* ===================================
-   SOCIAL LINKS
-   =================================== */
-.social-links {
-    display: flex;
-    gap: 30px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-
-.social-link {
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.social-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent-color);
-    transition: width 0.3s ease;
-}
-
-.social-link:hover::after {
-    width: 100%;
-}
-
-/* ===================================
-   NEWSLETTER SECTION
-   =================================== */
-.newsletter {
-    background: var(--secondary-bg);
-    padding: var(--spacing-lg) 60px;
-    text-align: center;
-}
-
-.newsletter-title {
-    font-family: "Cal Sans", sans-serif;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 700;
-    margin-bottom: 40px;
-    line-height: 1.2;
-}
-
-.newsletter-form {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    gap: 15px;
-}
-
-.newsletter-input {
-    flex: 1;
-    padding: 18px 25px;
-    border: 2px solid var(--text-primary);
-    background: white;
-    font-size: 16px;
-    font-family: "Cal Sans", sans-serif;
-}
-
-.newsletter-input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
-.newsletter-button {
-    padding: 18px 40px;
-    background: var(--accent-color);
-    color: white;
-    border: none;
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.newsletter-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-message {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.form-message.success {
-    color: #43e97b;
-}
-
-.form-message.error {
-    color: #f5576c;
-}
-
-/* ===================================
-   FOOTER
-   =================================== */
-footer {
-    padding: 60px;
-    text-align: center;
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-/* ===================================
-   ANIMATIONS
-   =================================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    if (window.scrollY > scrollThreshold) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+});
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
+// ===================================
+// INTERSECTION OBSERVER FOR SECTIONS
+// ===================================
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
 
-/* ===================================
-   EFECTO GRADIENTE ANIMADO (OPCIONAL)
-   =================================== */
-/* Descomenta esto si quieres un efecto de gradiente animado en el título */
-/*
-.hero-title {
-    background: linear-gradient(45deg, #ffffff, #00d4ff, #ffffff, #ff00ff);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: fadeInUp 1s ease forwards, gradientShift 8s ease infinite;
-}
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, observerOptions);
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-*/
+// Observe all sections
+document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+});
 
-/* ===================================
-   RESPONSIVE DESIGN
-   =================================== */
-@media (max-width: 1024px) {
-    :root {
-        --spacing-xl: 80px;
-        --spacing-lg: 60px;
-        --spacing-md: 40px;
-    }
+// ===================================
+// VIDEO AUTOPLAY - SIN INTERFERENCIA
+// ===================================
+const portfolioItems = document.querySelectorAll('.portfolio-card');
 
-    .hero-title {
-        margin-right: clamp(0px, 8vw, 120px);
-    }
+// Simplemente observa si los videos están en pantalla
+const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const video = entry.target.querySelector('.portfolio-video');
+        
+        if (video) {
+            if (entry.isIntersecting) {
+                // Está visible - asegurar que esté reproduciendo
+                if (video.paused) {
+                    video.play().catch(error => {
+                        console.log('Video autoplay prevented:', error);
+                    });
+                }
+            } else {
+                // No está visible - pausar para ahorrar recursos
+                video.pause();
+            }
+        }
+    });
+}, {
+    threshold: 0.2 // Solo necesita 20% visible para empezar
+});
 
-    .portfolio-grid {
-        gap: 20px;
-    }
-
-    .portfolio-card {
-        border-radius: 22px;
-    }
-
-    .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    :root {
-        --spacing-xl: 60px;
-        --spacing-lg: 40px;
-        --spacing-md: 30px;
-    }
+// Observar cada portfolio item
+portfolioItems.forEach(item => {
+    const video = item.querySelector('.portfolio-video');
     
-    header {
-        padding: 20px 30px;
+    if (video) {
+        // Observar visibilidad
+        videoObserver.observe(item);
+        
+        // Click para abrir proyecto
+        item.addEventListener('click', () => {
+            const projectName = item.dataset.project;
+            if (projectName) {
+                openProject(projectName);
+            }
+        });
+    }
+});
+
+// ===================================
+// EXPANDIR TARJETA AL FORMATO ORIGINAL DEL MEDIO (hover)
+// ===================================
+function setupCardExpansion(item) {
+    const media = item.querySelector('.portfolio-video, .portfolio-image');
+    if (!media) return;
+
+    const baseHeight = getComputedStyle(item).height; // altura definida por CSS (clamp)
+
+    function getNaturalRatio() {
+        if (media.tagName === 'VIDEO') {
+            return media.videoWidth && media.videoHeight
+                ? media.videoWidth / media.videoHeight
+                : null;
+        }
+        return media.naturalWidth && media.naturalHeight
+            ? media.naturalWidth / media.naturalHeight
+            : null;
     }
 
-    header.scrolled {
-        padding: 15px 30px;
+    function expand() {
+        const ratio = getNaturalRatio();
+
+        if (!ratio) {
+            // Metadata/imagen aún no disponible: esperar y reintentar
+            const evt = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
+            media.addEventListener(evt, expand, { once: true });
+            return;
+        }
+
+        const targetHeight = item.offsetWidth / ratio;
+        item.style.height = `${targetHeight}px`;
+        item.classList.add('is-expanded');
     }
 
-    .nav-menu {
-        display: none;
+    function collapse() {
+        item.style.height = baseHeight;
+        item.classList.remove('is-expanded');
     }
 
-    section {
-        padding: var(--spacing-lg) 30px;
-    }
-    
-    .hero {
-        padding: 0 30px;
-    }
-    
-    .hero-title {
-        font-size: clamp(40px, 12vw, 80px);
-        letter-spacing: -2px;
-        margin-right: 0;
-        margin-left: 0;
-        max-width: 100%;
-        width: 100%;
-        text-align: left;
-        min-width: 0;
-    }
-    
-    .hero-subtitle {
-        font-size: clamp(16px, 4vw, 24px);
-        margin-bottom: 80px;
-        word-break: break-word;
-        max-width: 100%;
-    }
-    
-    .section-title {
-        font-size: clamp(32px, 8vw, 60px);
-        margin-bottom: 30px;
-    }
-    
-    .section-description {
-        font-size: clamp(16px, 3vw, 20px);
-        margin-bottom: 40px;
-    }
-    
-    .cta-button {
-        padding: 18px 40px;
-        font-size: 16px;
-        width: 100%;
-        text-align: center;
-    }
-    
-    .cta-note {
-        font-size: 12px;
-        margin-top: 10px;
-    }
+    item.addEventListener('mouseenter', expand);
+    item.addEventListener('mouseleave', collapse);
 
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .portfolio-grid {
-        gap: 20px;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-    }
-    
-    .newsletter-title {
-        font-size: clamp(28px, 6vw, 40px);
-    }
-    
-    .service-title {
-        font-size: 24px;
-    }
-    
-    .service-description {
-        font-size: 15px;
-    }
-    
-    .social-links {
-        gap: 20px;
-        justify-content: center;
-    }
-    
-    .video-description h3 {
-        font-size: 24px;
-    }
-    
-    .video-description p {
-        font-size: 16px;
-    }
+    // Soporte táctil: expandir/colapsar al tocar
+    item.addEventListener('touchstart', () => {
+        if (item.classList.contains('is-expanded')) {
+            collapse();
+        } else {
+            expand();
+        }
+    }, { passive: true });
 }
 
-@media (max-width: 480px) {
-    :root {
-        --spacing-xl: 50px;
-        --spacing-lg: 35px;
-        --spacing-md: 25px;
-    }
-    
-    header {
-        padding: 15px 20px;
-    }
-    
-    header.scrolled {
-        padding: 12px 20px;
-    }
+portfolioItems.forEach(setupCardExpansion);
 
-    .logo {
-        font-size: 20px;
-    }
 
-    section {
-        padding: var(--spacing-lg) 20px;
-    }
-    
-    .hero {
-        padding: 0 20px;
-    }
+const mainVideo = document.getElementById('mainVideo');
 
-    .hero-title {
-        font-size: clamp(28px, 11vw, 50px);  /* Reducido el mínimo de 36px a 28px */
-        letter-spacing: -1px;  /* Reducido para que quepa mejor */
-        line-height: 1.1;  /* Aumentado ligeramente para mejor legibilidad */
-        margin-right: 0;
-        margin-bottom: 22px;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        max-width: 100%;
-    }
+if (mainVideo) {
+    mainVideo.addEventListener('play', () => {
+        console.log('Main video started playing');
+    });
 
-    .hero-subtitle {
-        font-size: clamp(12px, 4vw, 18px);  /* Reducido el mínimo de 14px a 12px */
-        letter-spacing: 0.5px;  /* Reducido de 1px */
-        margin-bottom: 80px;
-        word-break: break-word;
-        max-width: 100%;
-    }
-    
-    .scroll-indicator {
-        font-size: 12px;
-        bottom: 30px;
-    }
-    
-    .section-title {
-        font-size: clamp(28px, 10vw, 48px);
-        letter-spacing: -1.5px;
-        margin-bottom: 25px;
-    }
-    
-    .section-description {
-        font-size: clamp(15px, 4vw, 18px);
-        line-height: 1.5;
-        margin-bottom: 30px;
-    }
-    
-    .cta-button {
-        padding: 16px 30px;
-        font-size: 15px;
-        letter-spacing: 0.5px;
-    }
-    
-    .cta-note {
-        font-size: 11px;
-        margin-top: 8px;
-        line-height: 1.3;
-    }
-    
-    .portfolio-grid {
-        gap: 15px;
-        margin-top: 40px;
-    }
-    
-    .portfolio-card {
-        height: clamp(220px, 70vw, 340px);
-        border-radius: 18px;
-    }
+    mainVideo.addEventListener('pause', () => {
+        console.log('Main video paused');
+    });
 
-    .portfolio-info {
-        left: 18px;
-        right: 18px;
-        bottom: 16px;
-    }
-
-    .portfolio-title {
-        font-size: 19px;
-    }
-
-    .portfolio-desc {
-        font-size: 13px;
-    }
-    
-    .services-grid {
-        gap: 35px;
-        margin-top: 40px;
-    }
-    
-    .service-title {
-        font-size: 22px;
-        margin-bottom: 15px;
-    }
-    
-    .service-description {
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-    
-    .service-link {
-        font-size: 14px;
-    }
-    
-    .newsletter {
-        padding: var(--spacing-lg) 20px;
-    }
-    
-    .newsletter-title {
-        font-size: clamp(24px, 8vw, 36px);
-        margin-bottom: 30px;
-    }
-    
-    .social-links {
-        gap: 15px;
-        font-size: 14px;
-    }
-    
-    .social-link {
-        font-size: 14px;
-    }
-    
-    footer {
-        padding: 40px 20px;
-        font-size: 12px;
-    }
-    
-    .video-player-container {
-        margin-bottom: 30px;
-    }
-    
-    .video-description h3 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-    
-    .video-description p {
-        font-size: 14px;
-    }
-    
-    .about-content {
-        gap: 30px;
-    }
+    mainVideo.addEventListener('ended', () => {
+        console.log('Main video ended');
+    });
 }
 
-/* Extra small devices */
-@media (max-width: 375px) {
-    .hero-title {
-        font-size: clamp(24px, 10vw, 45px);  /* Aún más pequeño para pantallas tiny */
-        letter-spacing: -0.5px;
-        margin-right: 0;
-        line-height: 1.15;
-        word-break: break-word;
-        overflow-wrap: break-word;
-    }
+// ===================================
+// NEWSLETTER FORM HANDLER
+// ===================================
+const newsletterForm = document.getElementById('newsletterForm');
+const emailInput = document.getElementById('emailInput');
+const formMessage = document.getElementById('formMessage');
+
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const email = emailInput.value;
+        
+        // Show loading state
+        formMessage.textContent = 'Enviando...';
+        formMessage.className = 'form-message';
+        
+        try {
+            await simulateEmailSubmit(email);
+            
+            // Success message
+            formMessage.textContent = '¡GRACIAS! Email recibido - DEREK';
+            formMessage.classList.add('success');
+            
+            // Reset form
+            newsletterForm.reset();
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                formMessage.textContent = '';
+                formMessage.className = 'form-message';
+            }, 5000);
+            
+        } catch (error) {
+            // Error message
+            formMessage.textContent = 'SORRY, Email no fue recolectado. Intenta de nuevo.';
+            formMessage.classList.add('error');
+            
+            setTimeout(() => {
+                formMessage.textContent = '';
+                formMessage.className = 'form-message';
+            }, 5000);
+        }
+    });
+}
+
+// Simulate email submission
+function simulateEmailSubmit(email) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (email.includes('@')) {
+                resolve({ success: true });
+            } else {
+                reject({ error: 'Invalid email' });
+            }
+        }, 1500);
+    });
+}
+
+// ===================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ===================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        
+        if (target) {
+            const headerOffset = 100;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ===================================
+// PROJECT MODAL OR NAVIGATION
+// ===================================
+function openProject(projectName) {
+    console.log(`Opening project: ${projectName}`);
+    alert(`Ver proyecto: ${projectName}`);
+}
+
+// ===================================
+// ANALYTICS / TRACKING (OPTIONAL)
+// ===================================
+function trackEvent(eventName, eventData) {
+    console.log('Track Event:', eventName, eventData);
+}
+
+// Track CTA clicks
+document.querySelectorAll('.cta-button').forEach(button => {
+    button.addEventListener('click', () => {
+        trackEvent('cta_click', {
+            button_text: button.textContent.trim(),
+            page_location: window.location.pathname
+        });
+    });
+});
+
+// ===================================
+// CONSOLE MESSAGE
+// ===================================
+
+// ===================================
+// INITIALIZE ON DOM LOAD
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Website initialized successfully');
     
-    .hero-subtitle {
-        font-size: clamp(11px, 3.5vw, 16px);
-        letter-spacing: 0.3px;
-    }
+    // Asegurar que estamos en el inicio
+    window.scrollTo(0, 0);
     
-    .section-title {
-        font-size: clamp(26px, 11vw, 44px);
-    }
+    // Habilitar smooth scroll después de cargar
+    setTimeout(() => {
+        document.documentElement.classList.add('loaded');
+    }, 100);
     
-    .cta-button {
-        padding: 14px 25px;
-        font-size: 14px;
+    // Check if videos are supported
+    const testVideo = document.createElement('video');
+    if (testVideo.canPlayType) {
+        console.log('Video support: ✓');
+    } else {
+        console.warn('Video support: ✗ - Videos may not play correctly');
     }
-}
-
-/* Ultra small devices (iPhone SE, small Android) */
-@media (max-width: 320px) {
-    .hero {
-        padding: 0 15px;
-    }
-    
-    .hero-title {
-        font-size: clamp(22px, 9vw, 40px);
-        letter-spacing: 0;
-        margin-right: 0;
-        line-height: 1.2;
-    }
-    
-    .hero-subtitle {
-        font-size: clamp(10px, 3vw, 14px);
-    }
-}
-
-
-/* ===================================
-   AJUSTES PARA MÓVILES EN HORIZONTAL
-   =================================== */
-@media (max-height: 600px) and (orientation: landscape) {
-    .hero {
-        min-height: 100vh;
-        min-height: 100svh;
-        padding-inline: 24px;
-    }
-
-    .hero-title {
-        font-size: clamp(34px, 8vw, 90px);
-        line-height: 0.95;
-        letter-spacing: clamp(-1px, 0.2vw, 2px);
-        margin-right: 0;
-        margin-bottom: 18px;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(14px, 3vw, 24px);
-        margin-bottom: 54px;
-    }
-
-    .scroll-indicator {
-        right: 24px;
-        bottom: 14px;
-        font-size: 13px;
-    }
-}
-
-/* ===================================
-   ACCESIBILIDAD: REDUCIR ANIMACIONES
-   =================================== */
-@media (prefers-reduced-motion: reduce) {
-    html.loaded {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-.youtube-container {
-    position: relative;
-   
-    width: 100%;
-    padding-bottom: 56.25%; /* Ratio 16:9 */
-    height: 0;
-}
-
-.youtube-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+});
