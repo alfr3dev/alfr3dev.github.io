@@ -49,7 +49,7 @@ document.querySelectorAll('section').forEach(section => {
 // ===================================
 // VIDEO AUTOPLAY - SIN INTERFERENCIA
 // ===================================
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioItems = document.querySelectorAll('.portfolio-card');
 
 // Simplemente observa si los videos están en pantalla
 const videoObserver = new IntersectionObserver((entries) => {
