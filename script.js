@@ -93,34 +93,61 @@ portfolioItems.forEach(item => {
 });
 
 // ===================================
-// AJUSTE FINO: altura exacta según la proporción real del medio
-// (mejora progresiva; el efecto de expansión base ya funciona
-// solo con CSS aunque esto no llegue a ejecutarse)
+// EXPANSIÓN SIN BARRAS NEGRAS + AUTO-CENTRADO EN VIEWPORT
 // ===================================
 function setupCardExpansion(item) {
     const media = item.querySelector('.portfolio-video, .portfolio-image');
     if (!media) return;
 
-    function getNaturalRatio() {
+    let ratio = null;
+    let hoverTimer = null;
+    const CENTER_DELAY = 150; // ms - evita saltos al pasar rápido el cursor
+
+    // Precargar la proporción real del medio en cuanto esté disponible,
+    // sin esperar a que el usuario haga hover.
+    function captureRatio() {
         if (media.tagName === 'VIDEO') {
-            return media.videoWidth && media.videoHeight
-                ? media.videoWidth / media.videoHeight
-                : null;
+            if (media.videoWidth && media.videoHeight) {
+                ratio = media.videoWidth / media.videoHeight;
+            }
+        } else if (media.naturalWidth && media.naturalHeight) {
+            ratio = media.naturalWidth / media.naturalHeight;
         }
-        return media.naturalWidth && media.naturalHeight
-            ? media.naturalWidth / media.naturalHeight
-            : null;
+    }
+
+    captureRatio();
+    if (!ratio) {
+        const evt = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
+        media.addEventListener(evt, captureRatio, { once: true });
+    }
+
+    function centerCardInViewport(targetHeight) {
+        const rect = item.getBoundingClientRect();
+        const cardTop = rect.top + window.scrollY;
+        const targetScroll = cardTop - (window.innerHeight - targetHeight) / 2;
+
+        window.scrollTo({
+            top: Math.max(0, targetScroll),
+            behavior: 'smooth'
+        });
     }
 
     item.addEventListener('mouseenter', () => {
-        const ratio = getNaturalRatio();
-        if (!ratio) return; // se queda con la expansión genérica del CSS
-        const maxHeight = window.innerHeight * 0.88;
-        const targetHeight = Math.min(item.offsetWidth / ratio, maxHeight);
-        item.style.height = `${targetHeight}px`;
+        let targetHeight = Math.min(window.innerHeight * 0.78, 640);
+
+        if (ratio) {
+            // Ajusta la altura a la proporción real: así "cover" muestra
+            // el encuadre completo, sin recortar y sin barras negras.
+            targetHeight = Math.min(item.offsetWidth / ratio, window.innerHeight * 0.9);
+            item.style.height = `${targetHeight}px`;
+        }
+
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => centerCardInViewport(targetHeight), CENTER_DELAY);
     });
 
     item.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
         item.style.height = ''; // vuelve al CSS (clamp por defecto)
     });
 }
