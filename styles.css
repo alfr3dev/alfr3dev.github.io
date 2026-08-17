@@ -300,18 +300,20 @@ section.visible {
    PORTFOLIO GRID CON VIDEOS
    =================================== */
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 32px;
     margin-top: 0px;
 }
 
 /* Tarjeta: imagen/video a pantalla completa dentro de un contenedor
    redondeado, con el título y una descripción ancladas abajo-izquierda,
-   siempre visibles (como en el boceto de referencia). */
+   siempre visibles (como en el boceto de referencia). Ahora ocupa
+   todo el ancho disponible, en formato de lista. */
 .portfolio-card {
     position: relative;
-    aspect-ratio: 4/3;
+    width: 100%;
+    height: clamp(260px, 42vw, 480px);
     background: var(--secondary-bg);
     border-radius: 28px;
     overflow: hidden;
@@ -655,7 +657,6 @@ footer {
     }
 
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
     }
 
@@ -742,7 +743,6 @@ footer {
     }
 
     .portfolio-grid {
-        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -863,7 +863,7 @@ footer {
     }
     
     .portfolio-card {
-        aspect-ratio: 4/3;
+        height: clamp(220px, 70vw, 340px);
         border-radius: 18px;
     }
 
@@ -965,10 +965,6 @@ footer {
     .cta-button {
         padding: 14px 25px;
         font-size: 14px;
-    }
-    
-    .portfolio-grid {
-        grid-template-columns: 1fr;
     }
 }
 
