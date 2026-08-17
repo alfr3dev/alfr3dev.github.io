@@ -324,13 +324,15 @@ section.visible {
     will-change: height;
 }
 
-/* Expansión de respaldo garantizada por CSS puro (funciona aunque
-   el JS no logre leer aún las dimensiones exactas del medio).
-   El JS, cuando puede, sobreescribe esta altura con la proporción
-   real del video/imagen para que se vea completo sin recortes
-   ni barras negras. */
+/* Realce sutil al pasar el mouse (no cambia tamaño; el tamaño lo
+   controla la clase .is-focused según la posición de scroll). */
 .portfolio-card:hover {
-    height: min(78vh, 640px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+}
+
+/* Tarjeta enfocada: es la más cercana al centro del viewport mientras
+   el usuario scrollea. Se expande sola, sin mover el scroll. */
+.portfolio-card.is-focused {
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
     z-index: 5;
 }
@@ -366,7 +368,8 @@ section.visible {
     z-index: 1;
 }
 
-.portfolio-card:hover::after {
+.portfolio-card:hover::after,
+.portfolio-card.is-focused::after {
     opacity: 1;
 }
 
@@ -383,7 +386,8 @@ section.visible {
     pointer-events: none;
 }
 
-.portfolio-card:hover .portfolio-info {
+.portfolio-card:hover .portfolio-info,
+.portfolio-card.is-focused .portfolio-info {
     opacity: 1;
     transform: translateY(0);
 }
