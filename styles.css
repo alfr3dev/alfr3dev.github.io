@@ -324,16 +324,21 @@ section.visible {
     will-change: height;
 }
 
-/* Expansión garantizada por CSS puro (no depende de que el JS
-   pueda leer las dimensiones del video). El JS, si puede, ajusta
-   esta altura a la proporción exacta del medio. */
+/* Expansión de respaldo garantizada por CSS puro (funciona aunque
+   el JS no logre leer aún las dimensiones exactas del medio).
+   El JS, cuando puede, sobreescribe esta altura con la proporción
+   real del video/imagen para que se vea completo sin recortes
+   ni barras negras. */
 .portfolio-card:hover {
-    height: min(88vh, 760px);
+    height: min(78vh, 640px);
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
     z-index: 5;
 }
 
-/* Media (video o imagen) cubre toda la tarjeta */
+/* Media (video o imagen): siempre "cover", se adapta automáticamente
+   sin barras negras. Cuando el JS ajusta la altura de la tarjeta a
+   la proporción real del medio, "cover" muestra el encuadre completo
+   porque ya no hay descuadre entre la caja y el contenido. */
 .portfolio-video,
 .portfolio-image {
     position: absolute;
@@ -341,12 +346,6 @@ section.visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Al expandir, se ve el medio completo sin recortar */
-.portfolio-card:hover .portfolio-video,
-.portfolio-card:hover .portfolio-image {
-    object-fit: contain;
 }
 
 /* Degradado inferior-izquierdo para que el texto siempre sea legible
