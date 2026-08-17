@@ -324,16 +324,9 @@ section.visible {
     will-change: height;
 }
 
-/* Realce sutil al pasar el mouse (no cambia tamaño; el tamaño lo
-   controla la clase .is-focused según la posición de scroll). */
-.portfolio-card:hover {
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
-}
-
 /* Tarjeta enfocada: es la más cercana al centro del viewport mientras
    el usuario scrollea. Se expande sola, sin mover el scroll. */
 .portfolio-card.is-focused {
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
     z-index: 5;
 }
 
@@ -350,29 +343,6 @@ section.visible {
     object-fit: cover;
 }
 
-/* Degradado inferior-izquierdo para que el texto siempre sea legible
-   sin importar el contenido de fondo */
-.portfolio-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.75) 0%,
-        rgba(0, 0, 0, 0.35) 30%,
-        rgba(0, 0, 0, 0) 65%
-    );
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.portfolio-card:hover::after,
-.portfolio-card.is-focused::after {
-    opacity: 1;
-}
-
 .portfolio-info {
     position: absolute;
     left: 28px;
@@ -386,8 +356,7 @@ section.visible {
     pointer-events: none;
 }
 
-.portfolio-card:hover .portfolio-info,
-.portfolio-card.is-focused .portfolio-info {
+.portfolio-card:hover .portfolio-info {
     opacity: 1;
     transform: translateY(0);
 }
