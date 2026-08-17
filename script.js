@@ -129,7 +129,7 @@ function setupCardExpansion(item) {
         // superior) para que el centrado sea visualmente correcto.
         // Ajusta este valor si la tarjeta queda muy arriba o muy abajo:
         // positivo = baja la tarjeta, negativo = la sube.
-        const VERTICAL_OFFSET = 80;
+        const VERTICAL_OFFSET = 55;
 
         const targetScroll =
             cardTop - (window.innerHeight - targetHeight) / 2 - VERTICAL_OFFSET;
