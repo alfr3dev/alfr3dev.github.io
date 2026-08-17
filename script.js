@@ -93,74 +93,105 @@ portfolioItems.forEach(item => {
 });
 
 // ===================================
-// EXPANSIÓN SIN BARRAS NEGRAS + AUTO-CENTRADO EN VIEWPORT
+// AUTO-FOCUS POR SCROLL: la tarjeta más cercana al centro del
+// viewport se expande sola, sin forzar el scroll del usuario.
 // ===================================
-function setupCardExpansion(item) {
-    const media = item.querySelector('.portfolio-video, .portfolio-image');
-    if (!media) return;
+(function initScrollFocus() {
+    if (portfolioItems.length === 0) return;
 
-    let ratio = null;
-    let hoverTimer = null;
-    const CENTER_DELAY = 150; // ms - evita saltos al pasar rápido el cursor
+    // Cachear el ratio real (ancho/alto) de cada medio en cuanto
+    // esté disponible, para poder expandir sin barras negras.
+    const ratios = new Map();
 
-    // Precargar la proporción real del medio en cuanto esté disponible,
-    // sin esperar a que el usuario haga hover.
-    function captureRatio() {
-        if (media.tagName === 'VIDEO') {
-            if (media.videoWidth && media.videoHeight) {
-                ratio = media.videoWidth / media.videoHeight;
+    portfolioItems.forEach(item => {
+        const media = item.querySelector('.portfolio-video, .portfolio-image');
+        if (!media) return;
+
+        function captureRatio() {
+            if (media.tagName === 'VIDEO') {
+                if (media.videoWidth && media.videoHeight) {
+                    ratios.set(item, media.videoWidth / media.videoHeight);
+                }
+            } else if (media.naturalWidth && media.naturalHeight) {
+                ratios.set(item, media.naturalWidth / media.naturalHeight);
             }
-        } else if (media.naturalWidth && media.naturalHeight) {
-            ratio = media.naturalWidth / media.naturalHeight;
         }
-    }
 
-    captureRatio();
-    if (!ratio) {
-        const evt = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
-        media.addEventListener(evt, captureRatio, { once: true });
-    }
+        captureRatio();
+        if (!ratios.has(item)) {
+            const evt = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
+            media.addEventListener(evt, captureRatio, { once: true });
+        }
+    });
 
-    function centerCardInViewport(targetHeight) {
-        const rect = item.getBoundingClientRect();
-        const cardTop = rect.top + window.scrollY;
+    let currentFocused = null;
+    let ticking = false;
 
-        // Compensa el header fijo (que se superpone en la parte
-        // superior) para que el centrado sea visualmente correcto.
-        // Ajusta este valor si la tarjeta queda muy arriba o muy abajo:
-        // positivo = baja la tarjeta, negativo = la sube.
-        const VERTICAL_OFFSET = 55;
-
-        const targetScroll =
-            cardTop - (window.innerHeight - targetHeight) / 2 - VERTICAL_OFFSET;
-
-        window.scrollTo({
-            top: Math.max(0, targetScroll),
-            behavior: 'smooth'
-        });
-    }
-
-    item.addEventListener('mouseenter', () => {
-        let targetHeight = Math.min(window.innerHeight * 0.78, 640);
-
+    function applyFocus(item) {
+        const ratio = ratios.get(item);
         if (ratio) {
-            // Ajusta la altura a la proporción real: así "cover" muestra
-            // el encuadre completo, sin recortar y sin barras negras.
-            targetHeight = Math.min(item.offsetWidth / ratio, window.innerHeight * 0.9);
+            const targetHeight = Math.min(
+                item.offsetWidth / ratio,
+                window.innerHeight * 0.75,
+                640
+            );
             item.style.height = `${targetHeight}px`;
         }
+        item.classList.add('is-focused');
+    }
 
-        clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => centerCardInViewport(targetHeight), CENTER_DELAY);
-    });
+    function removeFocus(item) {
+        item.style.height = '';
+        item.classList.remove('is-focused');
+    }
 
-    item.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimer);
-        item.style.height = ''; // vuelve al CSS (clamp por defecto)
-    });
-}
+    function updateFocusedCard() {
+        ticking = false;
 
-portfolioItems.forEach(setupCardExpansion);
+        const viewportCenter = window.innerHeight / 2;
+        let closestItem = null;
+        let closestDistance = Infinity;
+
+        portfolioItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+
+            // Ignorar tarjetas que no tienen ninguna parte visible
+            if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+            const cardCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(cardCenter - viewportCenter);
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestItem = item;
+            }
+        });
+
+        if (closestItem !== currentFocused) {
+            if (currentFocused) removeFocus(currentFocused);
+            if (closestItem) applyFocus(closestItem);
+            currentFocused = closestItem;
+        } else if (closestItem) {
+            // Mismo elemento enfocado: refresca la altura por si
+            // cambió el ancho de ventana (resize) o recién se
+            // obtuvo el ratio real del medio.
+            applyFocus(closestItem);
+        }
+    }
+
+    function onScrollOrResize() {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateFocusedCard);
+        }
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+
+    // Estado inicial
+    updateFocusedCard();
+})();
 
 
 const mainVideo = document.getElementById('mainVideo');
