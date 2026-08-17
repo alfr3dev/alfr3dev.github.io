@@ -93,13 +93,13 @@ portfolioItems.forEach(item => {
 });
 
 // ===================================
-// EXPANDIR TARJETA AL FORMATO ORIGINAL DEL MEDIO (hover)
+// AJUSTE FINO: altura exacta según la proporción real del medio
+// (mejora progresiva; el efecto de expansión base ya funciona
+// solo con CSS aunque esto no llegue a ejecutarse)
 // ===================================
 function setupCardExpansion(item) {
     const media = item.querySelector('.portfolio-video, .portfolio-image');
     if (!media) return;
-
-    const baseHeight = getComputedStyle(item).height; // altura definida por CSS (clamp)
 
     function getNaturalRatio() {
         if (media.tagName === 'VIDEO') {
@@ -112,37 +112,17 @@ function setupCardExpansion(item) {
             : null;
     }
 
-    function expand() {
+    item.addEventListener('mouseenter', () => {
         const ratio = getNaturalRatio();
-
-        if (!ratio) {
-            // Metadata/imagen aún no disponible: esperar y reintentar
-            const evt = media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load';
-            media.addEventListener(evt, expand, { once: true });
-            return;
-        }
-
-        const targetHeight = item.offsetWidth / ratio;
+        if (!ratio) return; // se queda con la expansión genérica del CSS
+        const maxHeight = window.innerHeight * 0.88;
+        const targetHeight = Math.min(item.offsetWidth / ratio, maxHeight);
         item.style.height = `${targetHeight}px`;
-        item.classList.add('is-expanded');
-    }
+    });
 
-    function collapse() {
-        item.style.height = baseHeight;
-        item.classList.remove('is-expanded');
-    }
-
-    item.addEventListener('mouseenter', expand);
-    item.addEventListener('mouseleave', collapse);
-
-    // Soporte táctil: expandir/colapsar al tocar
-    item.addEventListener('touchstart', () => {
-        if (item.classList.contains('is-expanded')) {
-            collapse();
-        } else {
-            expand();
-        }
-    }, { passive: true });
+    item.addEventListener('mouseleave', () => {
+        item.style.height = ''; // vuelve al CSS (clamp por defecto)
+    });
 }
 
 portfolioItems.forEach(setupCardExpansion);
