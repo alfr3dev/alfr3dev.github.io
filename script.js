@@ -124,7 +124,15 @@ function setupCardExpansion(item) {
     function centerCardInViewport(targetHeight) {
         const rect = item.getBoundingClientRect();
         const cardTop = rect.top + window.scrollY;
-        const targetScroll = cardTop - (window.innerHeight - targetHeight) / 2;
+
+        // Compensa el header fijo (que se superpone en la parte
+        // superior) para que el centrado sea visualmente correcto.
+        // Ajusta este valor si la tarjeta queda muy arriba o muy abajo:
+        // positivo = baja la tarjeta, negativo = la sube.
+        const VERTICAL_OFFSET = 40;
+
+        const targetScroll =
+            cardTop - (window.innerHeight - targetHeight) / 2 - VERTICAL_OFFSET;
 
         window.scrollTo({
             top: Math.max(0, targetScroll),
