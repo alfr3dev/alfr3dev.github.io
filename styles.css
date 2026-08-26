@@ -143,7 +143,7 @@ header.scrolled {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 0 clamp(20px, 4vw, 60px);
     padding-inline: clamp(20px, 4vw, 60px);
     overflow: hidden;     /* Para que el video no se salga */
@@ -157,14 +157,13 @@ header.scrolled {
     letter-spacing: clamp(1px, 0.35vw, 5px);
     line-height: 0.95;
     margin-bottom: 40px;
-    margin-right: clamp(0px, 90vw, 1000px);
+    max-width: min(60vw, 700px);
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-    max-width: 100%;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+    hyphens: none;
     color: var(--hero-text-color);
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 0, 0, 0.2);
     transition: color 0.6s ease, text-shadow 0.6s ease;
@@ -178,6 +177,7 @@ header.scrolled {
     font-weight: 700;
     letter-spacing: 5px;
     margin-bottom: 100px;
+    align-self: flex-end;
     opacity: 0;
     animation: fadeInUp 1s ease 0.3s forwards;
     word-wrap: break-word;
@@ -307,9 +307,10 @@ section.visible {
 }
 
 /* Tarjeta: imagen/video a pantalla completa dentro de un contenedor
-   redondeado, con el título y una descripción ancladas abajo-izquierda,
-   siempre visibles (como en el boceto de referencia). Ahora ocupa
-   todo el ancho disponible, en formato de lista. */
+   redondeado, con el título y una descripción ancladas abajo-izquierda
+   (visibles solo al pasar el cursor). Ocupa todo el ancho disponible,
+   en formato de lista. El usuario se posiciona con su propio scroll,
+   sin ningún ajuste automático. */
 .portfolio-card {
     position: relative;
     width: 100%;
@@ -318,22 +319,15 @@ section.visible {
     border-radius: 28px;
     overflow: hidden;
     cursor: pointer;
-    transform-origin: center;
-    transition: box-shadow 0.45s ease,
-                height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: height;
+    transition: box-shadow 0.45s ease;
 }
 
-/* Tarjeta enfocada: es la más cercana al centro del viewport mientras
-   el usuario scrollea. Se expande sola, sin mover el scroll. */
-.portfolio-card.is-focused {
-    z-index: 5;
+.portfolio-card:hover {
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
 }
 
 /* Media (video o imagen): siempre "cover", se adapta automáticamente
-   sin barras negras. Cuando el JS ajusta la altura de la tarjeta a
-   la proporción real del medio, "cover" muestra el encuadre completo
-   porque ya no hay descuadre entre la caja y el contenido. */
+   sin barras negras. */
 .portfolio-video,
 .portfolio-image {
     position: absolute;
@@ -647,7 +641,7 @@ footer {
     }
 
     .hero-title {
-        margin-right: clamp(0px, 8vw, 120px);
+        max-width: min(70vw, 600px);
     }
 
     .portfolio-grid {
