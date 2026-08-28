@@ -41,6 +41,15 @@
 
 
     <!-- Portfolio Section -->
+    <!--
+        GALERÍA POR PROYECTO:
+        Cada .portfolio-card puede tener un atributo data-gallery con un
+        array JSON de medios extra (además del video/imagen principal).
+        Ejemplo:
+        data-gallery='[{"type":"image","src":"assets/foto2.jpg"},{"type":"video","src":"assets/clip2.mp4"}]'
+        Si el array está vacío, la sub-tarjeta solo muestra el media
+        principal (sin flechas ni puntos de navegación).
+    -->
     <section id="portfolio">
             <!-- Designed to Delight Section -->
     <section id="delight">
@@ -52,7 +61,7 @@
     </section>
         <div class="portfolio-grid">
             <!-- Portfolio Item 1 -->
-            <div class="portfolio-card" data-project="Nozzle">
+            <div class="portfolio-card" data-project="Nozzle" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/nozzlefall.mp4" type="video/mp4">
                 </video>
@@ -63,7 +72,7 @@
             </div>
 
             <!-- Portfolio Item 2 -->
-            <div class="portfolio-card" data-project="roman">
+            <div class="portfolio-card" data-project="roman" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/billar.mp4" type="video/mp4">
                 </video>
@@ -74,7 +83,7 @@
             </div>
 
             <!-- Portfolio Item 3 -->
-            <div class="portfolio-card" data-project="herman">
+            <div class="portfolio-card" data-project="herman" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/motor.mp4" type="video/mp4">
                 </video>
@@ -85,7 +94,7 @@
             </div>
 
             <!-- Portfolio Item 4 -->
-            <div class="portfolio-card" data-project="muuto">
+            <div class="portfolio-card" data-project="muuto" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/goproturn.mp4" type="video/mp4">
                 </video>
@@ -96,7 +105,7 @@
             </div>
 
             <!-- Portfolio Item 5 -->
-            <div class="portfolio-card" data-project="cosm">
+            <div class="portfolio-card" data-project="cosm" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/dollymotor.mp4" type="video/mp4">
                 </video>
@@ -107,7 +116,7 @@
             </div>
 
             <!-- Portfolio Item 6 -->
-            <div class="portfolio-card" data-project="type">
+            <div class="portfolio-card" data-project="type" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/boxfocus.mp4" type="video/mp4">
                 </video>
@@ -148,7 +157,7 @@
     
 
         <div class="portfolio-grid" style="margin-top: 80px;">
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/pcbsown.jpg"},{"type":"image","src":"assets/pcbsown.jpg"}]'>
                 <img class="portfolio-image" src="assets/pcbsown.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -156,7 +165,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/engravernoisepcbs3.mp4" type="video/mp4">
                 </video>
@@ -167,7 +176,7 @@
             </div>
            
             <div class="portfolio-grid" style="margin-top: 80px;">
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/Press Forge System.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -176,7 +185,7 @@
             </div>
 
             
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/xcarriage.mp4" type="video/mp4">
                 </video>
@@ -185,7 +194,7 @@
                     <p class="portfolio-desc">Pieza visual orientada a producto de software y datos.</p>
                 </div>
             </div>
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/inchambercloseuphotend.mp4" type="video/mp4">
                 </video>
@@ -194,7 +203,7 @@
                     <p class="portfolio-desc">Sistema modular explorado a través de render y animación.</p>
                 </div>
             </div>
-            <div class="portfolio-card">
+            <div class="portfolio-card" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/timelapse extrusorv3assembly.mp4" type="video/mp4">
                 </video>
@@ -264,6 +273,23 @@
     <footer>
         <p>Todo el contenido con derechos de autor Alfedo E. Valdez</p>
     </footer>
+    <!-- Project Detail Modal (sub-tarjeta dinámica) -->
+    <div class="project-modal" id="projectModal" aria-hidden="true">
+        <div class="project-modal-backdrop" data-close></div>
+        <div class="project-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="project-modal-close" type="button" data-close aria-label="Cerrar detalle del proyecto">
+                <span></span>
+                <span></span>
+            </button>
+            <div class="project-modal-media" id="modalMedia"></div>
+            <div class="project-modal-content">
+                <span class="project-modal-index" id="modalIndex"></span>
+                <h3 class="project-modal-title" id="modalTitle"></h3>
+                <p class="project-modal-desc" id="modalDesc"></p>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
