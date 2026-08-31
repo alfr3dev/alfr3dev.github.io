@@ -57,7 +57,9 @@ html.loaded {
     overflow: hidden;
 }
 
-.video-background video {
+.video-background video,
+.video-background img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -438,103 +440,6 @@ body.modal-open {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-/* Carrusel de galería dentro del media del modal */
-.project-modal-track {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.project-modal-slide {
-    flex: 0 0 100%;
-    width: 100%;
-    height: 100%;
-}
-
-.project-modal-slide video,
-.project-modal-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.project-modal-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.45);
-    color: #ffffff;
-    font-size: 16px;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.25s ease, transform 0.25s ease;
-}
-
-.project-modal-nav:hover {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.project-modal-nav.prev {
-    left: 16px;
-}
-
-.project-modal-nav.next {
-    right: 16px;
-}
-
-.project-modal-dots {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 16px;
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-}
-
-.project-modal-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(255, 255, 255, 0.45);
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.25s ease, transform 0.25s ease;
-}
-
-.project-modal-dot.active {
-    background: #ffffff;
-    transform: scale(1.25);
-}
-
-@media (max-width: 480px) {
-    .project-modal-nav {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-    }
-
-    .project-modal-nav.prev {
-        left: 10px;
-    }
-
-    .project-modal-nav.next {
-        right: 10px;
-    }
 }
 
 .project-modal-content {
