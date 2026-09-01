@@ -45,6 +45,13 @@
         data-gallery='[{"type":"image","src":"assets/foto2.jpg"},{"type":"video","src":"assets/clip2.mp4"}]'
         Si el array está vacío, la sub-tarjeta solo muestra el media
         principal (sin flechas ni puntos de navegación).
+
+        DESCRIPCIÓN DEL PANEL EXPANDIDO:
+        Por defecto, al expandir la tarjeta se reutiliza el mismo texto
+        de .portfolio-desc (el que aparece rápido al pasar el cursor).
+        Para mostrar un texto MÁS LARGO/DETALLADO solo dentro del panel
+        expandido, agrega el atributo data-full-desc a la tarjeta:
+        data-full-desc="Texto largo y detallado del proyecto..."
     -->
     <section id="portfolio">
             <!-- Designed to Delight Section -->
@@ -57,7 +64,7 @@
     </section>
         <div class="portfolio-grid" style="margin-top: 80px;">
             <!-- Portfolio Item 1 -->
-            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]'>
+            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]' data-full-desc="Segunda iteración de este proyecto de PCB propia: se repitió el flujo completo de diseño esquemático, ruteo de la placa y ensamblado de componentes, ajustando el diseño con lo aprendido en la primera versión.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -66,7 +73,7 @@
             </div>
 
             <!-- Portfolio Item 2 -->
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Vista de la placa terminada montada en su gabinete final, lista para pruebas de funcionamiento antes de pasar a producción de un lote pequeño.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -75,16 +82,16 @@
             </div>
 
             <!-- Portfolio Item 3 -->
-            <div class="portfolio-card" data-gallery="[]">
-                <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
+            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/surfaceprint.png"},{"type":"image","src":"assets/heatbedplate.png"},{"type":"image","src":"assets/yaxisplate.png"},{"type":"image","src":"assets/yaxisplatecut.jpg"},{"type":"image","src":"assets/sufaceprintcut.jpg"},{"type":"image","src":"assets/heatedbedplatecut.jpg"},{"type":"image","src":"assets/allcuts.jpg"}]' data-full-desc="Proceso completo de diseño y maquinado de las piezas de este proyecto: desde el modelo 3D de cada placa hasta el corte final. La galería muestra las superficies de impresión, la cama caliente y las placas del eje Y en cada etapa, incluyendo los cortes individuales y el conjunto ya ensamblado.">
+                <img class="portfolio-image" src="assets/disasembly.png" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
-                    <p class="portfolio-desc">Diseño y fabricación de PCB propia, de concepto a prototipo físico.</p>
+                    <p class="portfolio-desc">Diseño y fabricación de PCB propia, de concepto a xxxxxxprototipo físico.</p>
                 </div>
             </div>
 
             <!-- Portfolio Item 4 -->
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Ensamble final de esta variante del proyecto, con especial atención al acomodo de componentes y la revisión de continuidad antes del primer encendido.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -93,7 +100,7 @@
             </div>
 
             <!-- Portfolio Item 5 -->
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Etapa de validación mecánica: se revisó el ajuste físico de la placa dentro de su carcasa y la posición de los conectores expuestos.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -102,11 +109,21 @@
             </div>
 
             <!-- Portfolio Item 6 -->
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Pieza experimental grabada a mano sobre una superficie no convencional, explorando qué tan lejos se puede llevar el proceso de vibro-grabado fuera del formato típico de producto.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
                     <p class="portfolio-desc">Diseño y fabricación de PCB propia, de concepto a prototipo físico.</p>
+                </div>
+            </div>
+
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Diseño y fabricación de esta PCB desde cero: definición del esquemático, distribución de componentes y soldadura manual del prototipo inicial.">
+                <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/bkgweb8.mp4" type="video/mp4">
+                </video>
+                <div class="portfolio-info">
+                    <div class="portfolio-title">Wax.io</div>
+                    <p class="portfolio-desc">Pieza experimental fuera del formato clásico de producto.</p>
                 </div>
             </div>
         </div>
@@ -122,7 +139,7 @@
 
     </section>
         <div class="youtube-container">
-            <iframe width="560" height="150" src="https://www.youtube.com/embed/zl6lIX3u5UA?si=81mu1KqlaHeM_elR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="150" src="https://www.youtube.com/embed/NrXkmUIqYwQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </section>
 
@@ -138,7 +155,7 @@
         </p>
 
         <div class="portfolio-grid" style="margin-top: 80px;">
-            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]'>
+            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]' data-full-desc="Revisión posterior de la misma placa, con ajustes menores en el layout para simplificar el cableado y mejorar el acceso a los puntos de prueba.">
                 <img class="portfolio-image" src="assets/pcbsown.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -146,7 +163,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Prototipo montado y probado bajo carga, verificando que el diseño se comportara igual que en simulación antes de considerar una siguiente revisión.">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -154,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Pieza visual pensada para acompañar un producto de software: el render explora cómo comunicar datos y flujos de información de forma tangible.">
                 <img class="portfolio-image" src="assets/Press Forge System.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -162,7 +179,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Sistema modular donde cada módulo se diseñó por separado y luego se ensambló en conjunto, apoyado en render y animación para mostrar cómo encajan entre sí.">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/xcarriage.mp4" type="video/mp4">
                 </video>
@@ -171,7 +188,7 @@
                     <p class="portfolio-desc">Pieza visual orientada a producto de software y datos.</p>
                 </div>
             </div>
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Segunda pieza experimental fuera del formato clásico de producto, esta vez enfocada en el proceso de ensamblado visto en timelapse.">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/inchambercloseuphotend.mp4" type="video/mp4">
                 </video>
@@ -180,7 +197,7 @@
                     <p class="portfolio-desc">Sistema modular explorado a través de render y animación.</p>
                 </div>
             </div>
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery="[]" data-full-desc="Registro adicional del mismo montaje, mostrando el resultado final ya integrado antes de cerrar el gabinete.">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/timelapse extrusorv3assembly.mp4" type="video/mp4">
                 </video>

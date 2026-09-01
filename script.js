@@ -307,7 +307,11 @@ function buildCardExpansion(card) {
     if (!expand || expand.dataset.built === 'true') return;
 
     const title = card.querySelector('.portfolio-title')?.textContent.trim() || 'Proyecto';
-    const desc = card.querySelector('.portfolio-desc')?.textContent.trim() || '';
+    const hoverDesc = card.querySelector('.portfolio-desc')?.textContent.trim() || '';
+    // Descripción larga y propia del panel expandido. Si la tarjeta no
+    // define data-full-desc, se usa la misma descripción corta del hover
+    // como respaldo (para no romper tarjetas que aún no la tengan).
+    const desc = card.getAttribute('data-full-desc')?.trim() || hoverDesc;
     const items = getCardGallery(card);
 
     const inner = document.createElement('div');
