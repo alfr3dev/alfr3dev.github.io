@@ -55,10 +55,9 @@
         </p>
 
     </section>
-        <div class="portfolio-grid">
+        <div class="portfolio-grid" style="margin-top: 80px;">
             <!-- Portfolio Item 1 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
-            <div class="portfolio-card" data-gallery="[]">
+            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]'>
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Roman</div>
@@ -67,7 +66,6 @@
             </div>
 
             <!-- Portfolio Item 2 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -77,7 +75,6 @@
             </div>
 
             <!-- Portfolio Item 3 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -87,7 +84,6 @@
             </div>
 
             <!-- Portfolio Item 4 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -97,7 +93,6 @@
             </div>
 
             <!-- Portfolio Item 5 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -107,7 +102,6 @@
             </div>
 
             <!-- Portfolio Item 6 -->
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -136,15 +130,12 @@
 
     <!-- Not Into Products Section -->
     <section id="other-projects">
-        <section id="other-projects">
         <h2 class="section-title">¿NO TE GUSTAN LOS <span class="bold">PRODUCTOS?</span></h2>
         <p class="section-description">
             Mi experiencia está orientada a lanzamientos de productos y presentaciones que buscan inversión, pero la gente ha hecho algunos usos bastante creativos de mis habilidades.
             <br><br>
             No tengas miedo de contactarme si crees que tienes un proyecto interesante que podría gustarme.
         </p>
-        </section>
-    
 
         <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]'>
@@ -155,7 +146,6 @@
                 </div>
             </div>
 
-            <div class="portfolio-grid" style="margin-top: 80px;">
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -163,8 +153,7 @@
                     <p class="portfolio-desc">Diseño y fabricación de PCB propia, de concepto a prototipo físico.</p>
                 </div>
             </div>
-            
-            <div class="portfolio-grid" style="margin-top: 80px;">
+
             <div class="portfolio-card" data-gallery="[]">
                 <img class="portfolio-image" src="assets/Press Forge System.jpg" alt="Roman">
                 <div class="portfolio-info">
@@ -173,7 +162,6 @@
                 </div>
             </div>
 
-            
             <div class="portfolio-card" data-gallery="[]">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/xcarriage.mp4" type="video/mp4">
@@ -262,23 +250,9 @@
     <footer>
         <p>Todo el contenido con derechos de autor Alfedo E. Valdez</p>
     </footer>
-    <!-- Project Detail Modal (sub-tarjeta dinámica) -->
-    <div class="project-modal" id="projectModal" aria-hidden="true">
-        <div class="project-modal-backdrop" data-close></div>
-        <div class="project-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-            <button class="project-modal-close" type="button" data-close aria-label="Cerrar detalle del proyecto">
-                <span></span>
-                <span></span>
-            </button>
-            <div class="project-modal-media" id="modalMedia"></div>
-            <div class="project-modal-content">
-                <span class="project-modal-index" id="modalIndex"></span>
-                <h3 class="project-modal-title" id="modalTitle"></h3>
-                <p class="project-modal-desc" id="modalDesc"></p>
-            </div>
-        </div>
-    </div>
 
+    <!-- Lenis: scroll suave con inercia para toda la página -->
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
