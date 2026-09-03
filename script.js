@@ -308,6 +308,9 @@ function buildCardExpansion(card) {
 
     const title = card.querySelector('.portfolio-title')?.textContent.trim() || 'Proyecto';
     const hoverDesc = card.querySelector('.portfolio-desc')?.textContent.trim() || '';
+    // Nombre/subtítulo propio del proyecto (opcional), se muestra dentro
+    // del panel expandido, entre el título corto y la descripción larga.
+    const subtitle = card.getAttribute('data-subtitle')?.trim() || '';
     // Descripción larga y propia del panel expandido. Si la tarjeta no
     // define data-full-desc, se usa la misma descripción corta del hover
     // como respaldo (para no romper tarjetas que aún no la tengan).
@@ -328,11 +331,21 @@ function buildCardExpansion(card) {
     titleEl.className = 'portfolio-expand-title';
     titleEl.textContent = title;
 
+    const elementsForTextCol = [titleEl];
+
+    if (subtitle) {
+        const subtitleEl = document.createElement('p');
+        subtitleEl.className = 'portfolio-expand-subtitle';
+        subtitleEl.textContent = subtitle;
+        elementsForTextCol.push(subtitleEl);
+    }
+
     const descEl = document.createElement('p');
     descEl.className = 'portfolio-expand-desc';
     descEl.textContent = desc;
+    elementsForTextCol.push(descEl);
 
-    textCol.append(titleEl, descEl);
+    textCol.append(...elementsForTextCol);
 
     // Columna de galería
     const galleryCol = document.createElement('div');

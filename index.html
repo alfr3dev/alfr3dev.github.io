@@ -57,7 +57,7 @@
     <section id="portfolio">
             <!-- Designed to Delight Section -->
     <section id="delight">
-        <h2 class="section-title">DISEÑO ASISTIDO POR COMPUTADORA <span class="bold"></span></h2>
+        <h2 class="section-title">PORTAFOLIO <span class="bold"></span></h2>
         <p class="section-description">
             I remember the first time I saw a <span class="highlight">3d printer</span> I was 17 years old, and it blew my mind.
         </p>
@@ -65,7 +65,7 @@
     </section>
         <div class="portfolio-grid" style="margin-top: 80px;">
             <!-- Portfolio Item 1 -->
-            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]' data-full-desc="Segunda iteración de este proyecto de PCB propia: se repitió el flujo completo de diseño esquemático, ruteo de la placa y ensamblado de componentes, ajustando el diseño con lo aprendido en la primera versión.">
+            <div class="portfolio-card" data-gallery='[{"type":"video","src":"assets/engravernoisepcbs3.mp4"},{"type":"image","src":"assets/pcbsown.jpg"}]' data-subtitle="Analog Valve Sequencer" data-full-desc="Es un sistema basado en un timer 555 que mediante señales analógicas controla un par de mosfets los cuales se encargan de conmutar un par de solenoides los cuales son parte de válvulas neumáticas de 3 vías, se realizaron 3 versiones de esta placa las primeras 2 presentaron problemas de diseño ya que sufrían de corrientes parásitas las cuales provocaban un comportamiento inesperado de los solenoides , la tercera versión eliminó esos defectos con un nuevo diseño de pistas y uso de planos de tierra...">
                 <img class="portfolio-image" src="assets/pcbsown.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">PCB</div>
@@ -74,7 +74,7 @@
             </div>
 
             <!-- Portfolio Item 2 -->
-            <div class="portfolio-card" data-gallery="[]" data-full-desc="Vista de la placa terminada montada en su gabinete final, lista para pruebas de funcionamiento antes de pasar a producción de un lote pequeño.">
+            <div class="portfolio-card" data-gallery="[]" data-subtitle="Control Press System" data-full-desc="Aún en desarrollo,Mediante stm32 y periféricos como pantallas, encoders, sensores de temperatura y codificadores se desea formar un sistema para controlar una Prensa Hidráulica. La razón de implementar un sistema con interfaz gráfica (LVGL) se debe a que se desea poder grabar las operaciones de la máquina para después automatizar esas operaciones, Ejemplo, esta prensa se diseñó para la industria metalmecánica en específico el forjado de piezas en acero, los operarios de esta prensa deben realizar ciertas operaciones que deben ser lo más eficientes posibles, cuando una pieza metálica alcanza su temperatura de forjado (900-1000°c) el tiempo en el que se ejecutan las operaciones es crucial ya que tardarse demasiado en completar una operación hace que la pieza pierda temperatura , al perder temperatura necesitará calentarse de nuevo para poder terminar la pieza, eso representa un gasto ya que se necesita más energía, con este sistema se pretende poder cronometrar las operaciones y guiar intuitivamente al operario que operación es la siguiente">
                 <img class="portfolio-image" src="assets/Press Forge System.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Firmware</div>
@@ -83,7 +83,7 @@
             </div>
 
             <!-- Portfolio Item 3 -->
-            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/surfaceprint.png"},{"type":"image","src":"assets/heatbedplate.png"},{"type":"image","src":"assets/yaxisplate.png"},{"type":"image","src":"assets/yaxisplatecut.jpg"},{"type":"image","src":"assets/sufaceprintcut.jpg"},{"type":"image","src":"assets/heatedbedplatecut.jpg"},{"type":"image","src":"assets/allcuts.jpg"}]' data-full-desc="Proceso completo de diseño y maquinado de las piezas de este proyecto: desde el modelo 3D de cada placa hasta el corte final. La galería muestra las superficies de impresión, la cama caliente y las placas del eje Y en cada etapa, incluyendo los cortes individuales y el conjunto ya ensamblado.">
+            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/surfaceprint.png"},{"type":"image","src":"assets/heatbedplate.png"},{"type":"image","src":"assets/yaxisplate.png"},{"type":"image","src":"assets/yaxisplatecut.jpg"},{"type":"image","src":"assets/sufaceprintcut.jpg"},{"type":"image","src":"assets/heatedbedplatecut.jpg"},{"type":"image","src":"assets/allcuts.jpg"}]' data-subtitle="Fuga Termica" data-full-desc="Actualmente mi impresora 3d tiende a descalibrarse de la base constantemente, calibrarla antes de imprimir es toda una odisea , para ello he decidido cambiar la base del eje Y de fibra de vidrio que sostiene la base calefactable  por una de acero para evitar deformaciones consecuentes de la expansión térmica de los materiales, esta se cortó con una máquina cnc láser de fibra óptica, también pueden notar que uso una superficie abrasiva , resulta que las lijas de metal son excelentes superficies de impresión 3d, antes usaba un vidrio con una lija , ahora planeo usar la misma lija pero ahora en una placa de acero para así poder usar calibración por sonda inductiva...">
                 <img class="portfolio-image" src="assets/disasembly.png" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Corte Laser</div>
@@ -92,7 +92,7 @@
             </div>
 
             <!-- Portfolio Item 4 -->
-            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/caseengraver.png"},{"type":"image","src":"assets/matchengraver.png"},{"type":"image","src":"assets/engraverside.jpg"}]' data-full-desc="Ensamble final de esta variante del proyecto, con especial atención al acomodo de componentes y la revisión de continuidad antes del primer encendido.">
+            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/caseengraver.png"},{"type":"image","src":"assets/matchengraver.png"},{"type":"image","src":"assets/engraverside.jpg"}]' data-subtitle="Engraving System" data-full-desc="La mayoría de sistemas comerciales disponibles que se usan para grabar sobre metal son ineficientes, estos se diseñaron para usarse en metales blandos como plata, cobre, latón y oro , si necesitas grabar materiales más duros como aceros y sus aleaciones sería imposible con los sistemas convencionales, Diseñé todo el sistema neumático de esta alternativa, también su control analógico y su carcasa final">
                 <img class="portfolio-image" src="assets/1planeengraver.jpg" alt="Roman">
                 <div class="portfolio-info">
                     <div class="portfolio-title">Hardware Especializado</div>
@@ -103,7 +103,7 @@
             
 
             <!-- Portfolio Item 6 -->
-            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/extrusorcloseup.png"},{"type":"image","src":"assets/mendelprusa.jpg"},{"type":"image","src":"assets/impresoradeconcreto.jpg"},{"type":"image","src":"assets/imprpc.jpg"}]' data-full-desc="Registro adicional del mismo montaje, mostrando el resultado final ya integrado antes de cerrar el gabinete.">
+            <div class="portfolio-card" data-gallery='[{"type":"image","src":"assets/extrusorcloseup.png"},{"type":"image","src":"assets/mendelprusa.jpg"},{"type":"image","src":"assets/impresoradeconcreto.jpg"},{"type":"image","src":"assets/imprpc.jpg"}]' data-subtitle="2 impresoras = 1 impresora" data-full-desc="RepRap propone que puedes imprimir tu propia impresora 3d por lo que si quieres construir tu propia impresora 3d necesitas acceso a una impresora 3d primero, cuando construí mi primera impresora 3d no tenía la forma de acceder a una impresora 3d, por lo que recurrí a construir con madera las piezas de la primera impresora con la esperanza de armar piezas funcionales que me permitieran hacer funcionar la primera impresora que haría las siguientes piezas de plástico para la siguiente iteración, la idea era buena solo que no funciona a la primera, al final tuve que pasar por 2 impresoras con piezas de madera y pegamento para obtener la impresora definitiva">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/timelapse extrusorv3assembly.mp4" type="video/mp4">
                 </video>
@@ -113,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="portfolio-card" data-gallery="[]" data-full-desc="Diseño y fabricación de esta PCB desde cero: definición del esquemático, distribución de componentes y soldadura manual del prototipo inicial.">
+            <div class="portfolio-card" data-gallery="[]" data-subtitle="Antes de IA" data-full-desc="Al usar los programas de diseño CAD me interesó lo que se podía hacer en Blender, lo que me llevó a hacer animación de producto, hacer las animaciones y renderizarlas tomaba días">
                 <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
                     <source src="assets/bkgweb8.mp4" type="video/mp4">
                 </video>
